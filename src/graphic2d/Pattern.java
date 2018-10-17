@@ -7,8 +7,10 @@ import javax.swing.JComponent;
 
 import cube.Cube;
 import cube.Piece;
+import obs.Observable;
+import obs.Observer;
 
-public class Pattern extends JComponent
+public class Pattern extends JComponent implements Observer
 {
 	protected Cube cube;
 	public Pattern(Cube cube) 
@@ -44,18 +46,12 @@ public class Pattern extends JComponent
 					graphics.setColor(this.getBackground());
 				int realPosX = j * squareSizeX / cube.getSize() + offsetX;
 				int realPosY = i * squareSizeY / cube.getSize() + offsetY;
-				graphics.fillRect(realPosX, realPosY, squareSizeX / this.cube.getSize(), squareSizeY / this.cube.getSize());
+				graphics.fillRoundRect(realPosX, realPosY, squareSizeX / this.cube.getSize(), squareSizeY / this.cube.getSize(),10,10);
 				graphics.setColor(new Color(0,0,0));
-				graphics.drawRect(realPosX, realPosY, squareSizeX / this.cube.getSize(), squareSizeY / this.cube.getSize());
-				graphics.drawRect(realPosX + 1, realPosY + 1, squareSizeX / this.cube.getSize() - 1, squareSizeY / this.cube.getSize() - 1);
-				graphics.drawRect(realPosX + 2, realPosY + 2, squareSizeX / this.cube.getSize() - 2, squareSizeY / this.cube.getSize() - 2);
+				graphics.drawRoundRect(realPosX, realPosY, squareSizeX / this.cube.getSize(), squareSizeY / this.cube.getSize(),10,10);
+				graphics.drawRoundRect(realPosX + 1, realPosY + 1, squareSizeX / this.cube.getSize() - 1, squareSizeY / this.cube.getSize() - 1,10,10);
 			}
 		}
-	}
-	
-	public void update()
-	{
-		this.repaint();
 	}
 	
 	@Override
@@ -79,4 +75,13 @@ public class Pattern extends JComponent
 		this.paintSquare(newG, Cube.BACK,  3 * squareSizeX, squareSizeY);
 		this.paintSquare(newG, Cube.DOWN,  squareSizeX, 2 * squareSizeY);
     }
+
+	@Override
+	public void update(Observable observable, Object object) 
+	{
+		if(observable instanceof Cube)
+		{
+			this.repaint();
+		}
+	}
 }

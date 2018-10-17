@@ -55,6 +55,19 @@ public class Square
 		return square;
 	}
 	
+	public int[][] getColors()
+	{
+		int[][] colors = new int[this.size][this.size];
+		for(int i = 0; i < this.size; i++)
+		{
+			for(int j = 0; j < this.size; j++)
+			{
+				colors[i][j] = this.pieces[i][j].getColor();
+			}
+		}
+		return colors;
+	}
+	
 	public int getSize()
 	{
 		return this.size;

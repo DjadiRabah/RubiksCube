@@ -1,7 +1,7 @@
-package solver;
+package Solver;
 import cube.Cube;
 
 public interface Solver
 {
-	public String solve(Cube cube);
+	public void solve(Cube cube);
 }

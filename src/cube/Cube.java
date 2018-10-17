@@ -1,5 +1,10 @@
 package cube;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import obs.Observable;
+import obs.Observer;
 import rotation.Rotation;
 import rotation.RotationCube;
 import rotation.RotationX;
@@ -7,7 +12,7 @@ import rotation.RotationY;
 import rotation.RotationZ;
 import shuffle.Shuffle;
 
-public class Cube 
+public class Cube implements Observable, Observer
 {
 	public static final int TOP   = 0;
 	public static final int LEFT  = 1;
@@ -18,6 +23,7 @@ public class Cube
 	
 	protected Square[] squares;
 	protected int size;
+	protected List<Observer> observers;
 	
 	public Cube(int size)
 	{
@@ -28,6 +34,23 @@ public class Cube
 		{
 			this.squares[color] = new Square(this.size,color);
 		}
+		this.observers = new ArrayList<>();
+	}
+
+	public int getSquareLeft(int square)
+	{
+		if (square == BACK)
+			return Cube.RIGHT;
+		else if (square == RIGHT)
+			return Cube.FRONT;
+		else if (square == FRONT)
+			return Cube.LEFT;
+		else if (square == LEFT)
+			return Cube.BACK;
+		else if (square == TOP)
+			return Cube.LEFT;
+		else if (square == DOWN)
+			return Cube.LEFT;
 	}
 	
 	public void shuffle(Shuffle s)
@@ -57,24 +80,34 @@ public class Cube
 		return true;
 	}
 	
-	public void rotate(int direction, int n)
+	public void rotate(Integer[] rotation)
 	{
-		new RotationCube().rotate(this,direction,n);
+		if(rotation[1] == -1)
+			this.rotate(rotation[0]);
+		else
+			this.rotate(rotation[0], rotation[1]);
 	}
 	
-	public void rotate(int direction, int index,  int n)
+	public void rotate(int direction)
 	{
+		this.notifyObserversRotation() ;
+		new RotationCube().rotate(this,direction);
+	}
+	
+	public void rotate(int direction, int index)
+	{
+		this.notifyObserversRotation() ;
 		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
 		{
-			new RotationX().rotate(this, direction, index, n);
+			new RotationX().rotate(this, direction, index);
 		}
 		else if ((direction == Rotation.UP) || (direction == Rotation.DOWN))
 		{
-			new RotationY().rotate(this, direction, index, n);
+			new RotationY().rotate(this, direction, index);
 		}
 		else if ((direction == Rotation.CLOCKWISE) || (direction == Rotation.COUNTERCLOCKWISE))
 		{
-			new RotationZ().rotate(this, direction, index, n);
+			new RotationZ().rotate(this, direction, index);
 		}
 	}
 	
@@ -106,5 +139,31 @@ public class Cube
 		}
 
 		return str;
+	}
+	
+	public void notifyObserversRotation() 
+	{
+		for(int i = 0; i < this.observers.size(); i++)
+		{
+			this.observers.get(i).update(this,0);
+		}
+	}
+
+	@Override
+	public void addObserver(Observer newObserver) 
+	{
+		this.observers.add(newObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Observable observable, Object object) 
+	{
+		this.rotate((Integer[]) object);
 	}
 }

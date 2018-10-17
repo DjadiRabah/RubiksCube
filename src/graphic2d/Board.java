@@ -7,11 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cube.Cube;
+import rotation.RotationObserver;
 
 public class Board extends JPanel
 {
 	protected int index;
-	public Board(Cube cube, Pattern pattern) 
+	public Board(Cube cube, RotationObserver rotationObserver) 
 	{
 		super();
 		this.index = 1;
@@ -23,50 +24,59 @@ public class Board extends JPanel
 		JPanel rotationSimplePanel = new JPanel();
 		rotationSimplePanel.setLayout(new GridLayout(2,1));
 		
-		JButton[] rotationButtons = new JButton[6];
-		rotationButtons[0] = new JButton("Tourner une ligne vers la gauche");
-		rotationButtons[1] = new JButton("Tourner une ligne vers la droite");
-		rotationButtons[2] = new JButton("Tourner une colonne vers le haut");
-		rotationButtons[3] = new JButton("Tourner une colonne vers le bas");
-		rotationButtons[4] = new JButton("Tourner une face dans le sens horaire");
-		rotationButtons[5] = new JButton("Tourner une face dans le sens trigo");
+		ButtonRotation[] rotationButtons = new ButtonRotation[6];
+		rotationButtons[0] = new ButtonRotation("Tourner une ligne vers la gauche");
+		rotationButtons[1] = new ButtonRotation("Tourner une ligne vers la droite");
+		rotationButtons[2] = new ButtonRotation("Tourner une colonne vers le haut");
+		rotationButtons[3] = new ButtonRotation("Tourner une colonne vers le bas");
+		rotationButtons[4] = new ButtonRotation("Tourner une face dans le sens horaire");
+		rotationButtons[5] = new ButtonRotation("Tourner une face dans le sens trigo");
 		
 		JPanel rotationSimple = new JPanel();
 		rotationSimple.setLayout(new GridLayout(3,2));
 		for(int i = 0; i < 6; i++)
 		{
-			rotationButtons[i].addActionListener(new ControllerRotation(cube,pattern,this));
+			rotationButtons[i].addActionListener(new ControllerRotation(rotationButtons[i]));
+			rotationButtons[i].addObserver(rotationObserver);
+			rotationButtons[i].addObserver(cube);
 			rotationSimple.add(rotationButtons[i]);
 		}
 		rotationSimplePanel.add(rotationSimple);
 		
 		JPanel indexPanel = new JPanel();
-		JButton[] index = new JButton[cube.getSize()];
+		indexPanel.setLayout(new GridLayout(1, cube.getSize()));
+		ButtonIndex[] index = new ButtonIndex[cube.getSize()];
 		for(int i = 0; i < index.length; i++)
 		{
-			index[i] = new JButton((i + 1) + "");
+			index[i] = new ButtonIndex((i + 1) + "");
 			if(i == 0)
 			{
 				index[i].setForeground(Color.RED);
 			}
-			index[i].addActionListener(new IndexController(this, index, index[i], cube.getSize()));
+			index[i].addActionListener(new IndexController(index, index[i]));
+			for(int j = 0; j < 6; j++)
+			{
+				index[i].addObserver(rotationButtons[j]);
+			}
 			indexPanel.add(index[i]);
 		}
 		rotationSimplePanel.add(indexPanel);
 		
-		JButton[] rotationCubeButtons = new JButton[6];
-		rotationCubeButtons[0] = new JButton("Tourner le cube vers la gauche");
-		rotationCubeButtons[1] = new JButton("Tourner le cube vers la droite");
-		rotationCubeButtons[2] = new JButton("Tourner le cube vers le haut");
-		rotationCubeButtons[3] = new JButton("Tourner le cube vers le bas");
-		rotationCubeButtons[4] = new JButton("Tourner le cube dans le sens horaire");
-		rotationCubeButtons[5] = new JButton("Tourner le cube dans le sens trigo");
+		ButtonRotation[] rotationCubeButtons = new ButtonRotation[6];
+		rotationCubeButtons[0] = new ButtonRotation("Tourner le cube vers la gauche");
+		rotationCubeButtons[1] = new ButtonRotation("Tourner le cube vers la droite");
+		rotationCubeButtons[2] = new ButtonRotation("Tourner le cube vers le haut");
+		rotationCubeButtons[3] = new ButtonRotation("Tourner le cube vers le bas");
+		rotationCubeButtons[4] = new ButtonRotation("Tourner le cube dans le sens horaire");
+		rotationCubeButtons[5] = new ButtonRotation("Tourner le cube dans le sens trigo");
 		
 		JPanel rotationCube = new JPanel();
 		rotationCube.setLayout(new GridLayout(3,2));
 		for(int i = 0; i < 6; i++)
 		{
-			rotationCubeButtons[i].addActionListener(new ControllerRotationCube(cube,pattern));
+			rotationCubeButtons[i].addActionListener(new ControllerRotation(rotationCubeButtons[i]));
+			rotationCubeButtons[i].addObserver(rotationObserver);
+			rotationCubeButtons[i].addObserver(cube);
 			rotationCube.add(rotationCubeButtons[i]);
 		}
 		
@@ -74,15 +84,5 @@ public class Board extends JPanel
 		rotation.add(rotationCube);
 
 		this.add(rotation);
-	}
-	
-	public void setindex(int index)
-	{
-		this.index = index;
-	}
-	
-	public int getIndex()
-	{
-		return this.index;
 	}
 }

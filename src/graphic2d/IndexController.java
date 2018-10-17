@@ -8,15 +8,11 @@ import javax.swing.JButton;
 
 public class IndexController implements ActionListener
 {
-	protected Board board;
-	protected int size;
 	protected JButton[] buttons;
-	protected JButton button;
+	protected ButtonIndex button;
 	
-	public IndexController(Board board, JButton[] buttons, JButton button, int size) 
+	public IndexController(JButton[] buttons, ButtonIndex button) 
 	{
-		this.board = board;
-		this.size = size;
 		this.button = button;
 		this.buttons = buttons;
 	}
@@ -24,21 +20,21 @@ public class IndexController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent event) 
 	{
-		for(int i = 1; i < this.size + 1; i++)
+		for(int i = 1; i < this.buttons.length + 1; i++)
 		{
 			if(event.getActionCommand().equals(i + ""))
 			{
-				this.board.setindex(i);
 				this.button.setForeground(Color.RED);
-				for(int j = 1; j < this.size + 1; j++)
+				for(int j = 1; j < this.buttons.length + 1; j++)
 				{
 					if(!this.buttons[j-1].getText().equals(i + ""))
 					{
 						this.buttons[j-1].setForeground(Color.BLACK);
 					}
 				}
+				this.button.notifyObservers();
+				return;
 			}
 		}
 	}
-
 }

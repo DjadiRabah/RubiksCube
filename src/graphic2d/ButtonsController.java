@@ -23,7 +23,6 @@ public class ButtonsController implements ActionListener
 		if(event.getActionCommand().equals("Melanger"))
 		{
 			this.cube.shuffle(new ShuffleRandom());
-			this.pattern.update();
 		}
 	}
 }
