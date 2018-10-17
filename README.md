@@ -1,6 +1,6 @@
 # Rubik's Cube 
 ## Description
-Projet d'une application Android de Rubik's Cube, permettant à son utilisateur de jouer ou de lancer la résolution d'un Rubik's Cube via saisie manuelle ou photographie.
+Projet d'une application Android de Rubik's Cube permettant de jouer ou de lancer la résolution d'un Rubik's Cube via saisie manuelle ou photographie.
 
 ## Versions
 Version 1.0 17/10/2018
