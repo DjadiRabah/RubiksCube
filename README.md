@@ -4,7 +4,7 @@ Projet d'une application Android de Rubik's Cube permettant de jouer ou de lance
 
 ## Versions
 Version 1.0 17/10/2018
- - Ajouts de fonctionnalités permermettant :
+ - Ajouts de fonctionnalités permettant :
   - d'afficher un rubik's Cube sous forme de patron
   - de mélanger le cube avec le boutton "Mélanger"
   - de faire tourner les différentes faces du Rubik's Cube
