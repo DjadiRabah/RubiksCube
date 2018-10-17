@@ -1,0 +1,1 @@
+![I'm a relative reference to a repository file](./Asset/ghost2.png) Le fantôme rose prépare une embuscade au pacman et vise le carrefour le plus proche de ce dernier. 
