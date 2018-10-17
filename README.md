@@ -4,9 +4,11 @@ Projet consistant à permettre à son utilisateur de jouer ou de lancer la réso
 
 ## Versions
 Version 1.0 17/10/2018
- - permet de jouer avec un Rubik's Cube (sous forme de patron) avec l'interface graphique Swing.
- - permet de mélanger le cube avec le boutton "Mélanger".
- - permet d'annuler la dernière rotation avec le boutton "Retour".
+ - Ajouts de fonctionnalités permermettant :
+  - d'afficher un rubik's Cube sous forme de patron
+  - de mélanger le cube avec le boutton "Mélanger"
+  - de faire tourner les différentes faces du Rubik's Cube
+  - d'annuler la dernière rotation avec le boutton "Retour"
  ![solvedCube](https://dwarves.iut-fbleau.fr/git/djadi/RubiksCube/raw/master/Ressources/SolvedCube.png)
  ![unsolvedCube](https://dwarves.iut-fbleau.fr/git/djadi/RubiksCube/raw/master/Ressources/UnsolvedCube.png)
 
