@@ -1,7 +1,7 @@
 package cube;
 
 /**
- * Classe représentant une pièce d'une des faces du Rubik's Cube
+ * Représente une pièce d'une des faces du Rubik's Cube
  *  
  * @author Rabah DJADI.
  */
@@ -56,7 +56,10 @@ public class Piece
 	}
 	
 	/**
-     * Obtenir la couleur de la pièce sous forme d'entier
+     * Renvoie la couleur de la pièce sous forme d'entier
+     * l'entier renvoyé est un entier compris entre 0 et 6 inclus
+     * 
+     * @return la couleur de la pièce
      */
 	public int getColor()
 	{
@@ -64,8 +67,9 @@ public class Piece
 	}
 	
 	/**
-     * Obtenir la couleur de la pièce sous forme de chaine de caratères
+     * Renvoie la couleur de la pièce sous forme de chaine de caratères
      * 
+     * @return la couleur de la pièce sous forme de String
      * @see Object
      */
 	@Override
