@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2018-10-22" view-index="0" gantt-divider-location="388" resource-divider-location="300" version="2.8.9" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2018-11-05" view-index="0" gantt-divider-location="388" resource-divider-location="300" version="2.8.9" locale="fr">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Nom" width="246" order="0"/>
         <field id="tpd4" name="Date de début" width="59" order="1"/>
         <field id="tpd5" name="Date de fin" width="79" order="2"/>
-        <option id="color.recent"><![CDATA[#ccffcc #99ff00 #ffcc00 #ffff00 #ffcc66 #ff9900 #ff9999 #ff6666 #00ff00 #6699ff]]></option>
+        <option id="color.recent"><![CDATA[#99ff99 #00ff66 #99ff00 #00cc00 #66ffcc #00ffcc #99ffcc #00cccc #ccffcc #66ff33]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="210" order="0"/>
@@ -35,15 +35,20 @@
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
         <task id="13" name="Début du Projet" color="#8cb6ce" meeting="true" start="2018-11-05" duration="0" complete="0" thirdDate="2018-11-05" thirdDate-constraint="0" expand="true"/>
-        <task id="35" name="Rédaction du cahier des charges" color="#0000ff" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-05" thirdDate-constraint="0" expand="false">
+        <task id="35" name="Rédaction du cahier des charges" color="#0000ff" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-05" thirdDate-constraint="0" expand="true">
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+            <depend id="168" type="2" difference="0" hardness="Strong"/>
+            <depend id="172" type="2" difference="0" hardness="Strong"/>
+            <depend id="173" type="2" difference="0" hardness="Strong"/>
+            <depend id="192" type="2" difference="0" hardness="Strong"/>
             <task id="38" name="Etude de l'existant" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-05" thirdDate-constraint="0" expand="true"/>
             <task id="44" name="Expression des besoins" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-06" thirdDate-constraint="0" expand="true"/>
             <task id="39" name="Besoins fonctionnels" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-07" thirdDate-constraint="0" expand="true"/>
             <task id="40" name="Besoins non-fonctionnels" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-08" thirdDate-constraint="0" expand="true"/>
             <task id="41" name="Analyse Technique" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-09" thirdDate-constraint="0" expand="true"/>
-            <task id="42" name="Réalisation des diagrammes" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-12" thirdDate-constraint="0" expand="false">
+            <task id="42" name="Réalisation des diagrammes" color="#0066cc" meeting="false" start="2018-11-05" duration="11" complete="0" thirdDate="2018-11-12" thirdDate-constraint="0" expand="true">
                 <depend id="64" type="2" difference="0" hardness="Strong"/>
-                <depend id="174" type="2" difference="0" hardness="Strong"/>
+                <depend id="192" type="2" difference="0" hardness="Strong"/>
                 <task id="127" name="Diagramme de Cas d'utilisation" color="#6699ff" meeting="false" start="2018-11-05" duration="4" complete="0" thirdDate="2018-11-12" thirdDate-constraint="0" expand="true">
                     <depend id="135" type="2" difference="0" hardness="Strong"/>
                 </task>
@@ -57,44 +62,58 @@
                 <task id="154" name="Wireflow" color="#6699ff" meeting="false" start="2018-11-13" duration="5" complete="0" thirdDate="2018-11-13" thirdDate-constraint="0" expand="true"/>
             </task>
         </task>
-        <task id="64" name="Développement" color="#ff0000" meeting="false" start="2018-11-20" duration="54" complete="0" thirdDate="2018-10-16" thirdDate-constraint="0" expand="true">
-            <task id="168" name="Développement Application Android" color="#ff6666" meeting="false" start="2018-11-20" duration="4" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+        <task id="64" name="Développement" color="#ff0000" meeting="false" start="2018-11-20" duration="73" complete="0" thirdDate="2018-10-16" thirdDate-constraint="0" expand="true">
+            <task id="168" name="Développement Application Android" color="#ff6666" meeting="false" start="2018-11-20" duration="63" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
                 <depend id="187" type="2" difference="0" hardness="Strong"/>
-                <task id="172" name="Interface Graphique" color="#ff6666" meeting="false" start="2018-11-20" duration="1" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="false">
-                    <task id="209" name="Identification compte Google" meeting="false" start="2018-11-20" duration="1" complete="0" expand="true"/>
-                    <task id="210" name="Affichage Temps et Nombre de mouvements" meeting="false" start="2018-11-20" duration="1" complete="0" expand="true"/>
+                <task id="172" name="Interface Graphique" color="#ff6666" meeting="false" start="2018-11-20" duration="52" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true">
+                    <task id="209" name="Identification compte Google" color="#ffcccc" meeting="false" start="2018-11-20" duration="10" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                        <depend id="188" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="210" name="Affichage Temps et Nombre de mouvements" color="#ffcccc" meeting="false" start="2019-01-17" duration="10" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="192" name="Rubik's Cube en 3D" color="#ff9900" meeting="false" start="2018-11-20" duration="4" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="false">
-                    <task id="194" name="Modélisation" color="#ffcc66" meeting="false" start="2018-11-20" duration="1" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                <task id="192" name="Rubik's Cube en 3D" color="#ff9900" meeting="false" start="2018-11-20" duration="56" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                    <depend id="224" type="2" difference="0" hardness="Strong"/>
+                    <depend id="227" type="2" difference="0" hardness="Strong"/>
+                    <task id="194" name="Modélisation" color="#ffcc66" meeting="false" start="2018-11-20" duration="14" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
                         <depend id="197" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="197" name="Rotation à 360°" color="#ffcc66" meeting="false" start="2018-11-21" duration="1" complete="0" thirdDate="2018-11-21" thirdDate-constraint="0" expand="true">
+                    <task id="197" name="Rotation à 360°" color="#ffcc66" meeting="false" start="2018-12-10" duration="14" complete="0" thirdDate="2018-11-21" thirdDate-constraint="0" expand="true">
                         <depend id="199" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="199" name="Gestion des mouvements tactiles" color="#ffcc66" meeting="false" start="2018-11-22" duration="1" complete="0" thirdDate="2018-11-22" thirdDate-constraint="0" expand="true">
+                    <task id="199" name="Gestion des mouvements tactiles" color="#ffcc66" meeting="false" start="2018-12-28" duration="14" complete="0" thirdDate="2018-11-22" thirdDate-constraint="0" expand="true">
                         <depend id="206" type="2" difference="0" hardness="Strong"/>
+                        <depend id="210" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="206" name="Sérialisation Rubik's Cube" color="#ffcc66" meeting="false" start="2018-11-23" duration="1" complete="0" thirdDate="2018-11-23" thirdDate-constraint="0" expand="true"/>
+                    <task id="206" name="Sérialisation Rubik's Cube" color="#ffcc66" meeting="false" start="2019-01-17" duration="14" complete="0" thirdDate="2018-11-23" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="173" name="Solveur" color="#ff9900" meeting="false" start="2018-11-20" duration="2" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="false">
-                    <task id="174" name="Codage du solveur" color="#ffcc66" meeting="false" start="2018-11-20" duration="1" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true">
+                <task id="173" name="Solveur" color="#ff9900" meeting="false" start="2018-11-20" duration="60" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true">
+                    <task id="174" name="Codage du solveur" color="#ffcc66" meeting="false" start="2018-11-20" duration="30" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true">
                         <depend id="175" type="2" difference="0" hardness="Strong"/>
                         <depend id="176" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="175" name="Capture Photo" color="#ffcc66" meeting="false" start="2018-11-21" duration="1" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true"/>
-                    <task id="176" name="Saisie Manuelle" color="#ffcc66" meeting="false" start="2018-11-21" duration="1" complete="0" thirdDate="2018-11-19" thirdDate-constraint="0" expand="true"/>
+                    <task id="175" name="Capture Photo" color="#ffcc66" meeting="false" start="2019-01-01" duration="30" complete="0" thirdDate="2018-11-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="176" name="Saisie Manuelle" color="#ffcc66" meeting="false" start="2019-01-01" duration="30" complete="0" thirdDate="2018-11-19" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="178" name="Base de Données" color="#ff9900" meeting="false" start="2018-11-20" duration="2" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
-                    <task id="188" name="Création Base de données" color="#ffcc66" meeting="false" start="2018-11-20" duration="1" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                <task id="178" name="Base de Données" color="#ff9900" meeting="false" start="2018-12-04" duration="20" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                    <depend id="224" type="2" difference="0" hardness="Strong"/>
+                    <depend id="227" type="2" difference="0" hardness="Strong"/>
+                    <task id="188" name="Création Base de données" color="#ffcc66" meeting="false" start="2018-12-04" duration="10" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
                         <depend id="179" type="2" difference="0" hardness="Strong"/>
+                        <depend id="217" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="179" name="Connexion à la base de données" color="#ffcc66" meeting="false" start="2018-11-21" duration="1" complete="0" thirdDate="2018-11-21" thirdDate-constraint="0" expand="true"/>
+                    <task id="179" name="Connexion à la base de données" color="#ffcc66" meeting="false" start="2018-12-18" duration="10" complete="0" thirdDate="2018-11-21" thirdDate-constraint="0" expand="true"/>
+                    <task id="217" name="Sauvegarde dans la base de données" color="#ffcc66" meeting="false" start="2018-12-18" duration="10" complete="0" thirdDate="2018-11-21" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="212" name="Classement" meeting="false" start="2018-11-20" duration="1" complete="0" expand="true"/>
-                <task id="214" name="Succès" meeting="false" start="2018-11-20" duration="1" complete="0" expand="true"/>
+                <task id="222" name="Statistiques joueur" color="#00ff66" meeting="false" start="2019-02-06" duration="7" complete="0" thirdDate="2019-01-07" thirdDate-constraint="0" expand="true">
+                    <task id="224" name="Implémentation du système de classement" color="#99ff99" meeting="false" start="2019-02-06" duration="7" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true"/>
+                    <task id="227" name="Implémentation du système de classement" color="#99ff99" meeting="false" start="2019-02-06" duration="7" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true"/>
+                </task>
             </task>
-            <task id="187" name="Développement Site Web" color="#99ff00" meeting="false" start="2018-12-18" duration="34" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
-                <task id="202" name="Connexion à la base de données" color="#ccffcc" meeting="false" start="2018-12-18" duration="34" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true"/>
+            <task id="187" name="Développement Site Web" color="#00cccc" meeting="false" start="2019-02-15" duration="10" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true">
+                <task id="221" name="Structure du site" color="#66ffcc" meeting="false" start="2019-02-15" duration="5" complete="0" thirdDate="2019-01-01" thirdDate-constraint="0" expand="true">
+                    <depend id="202" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="202" name="Connexion à la base de données" color="#66ffcc" meeting="false" start="2019-02-22" duration="5" complete="0" thirdDate="2018-11-20" thirdDate-constraint="0" expand="true"/>
             </task>
         </task>
         <task id="162" name="Fin du projet" color="#00ff00" meeting="true" start="2019-02-28" duration="0" complete="0" thirdDate="2018-11-05" thirdDate-constraint="0" expand="true"/>
