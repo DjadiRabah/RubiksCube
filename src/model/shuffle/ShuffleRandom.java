@@ -5,6 +5,7 @@ import java.util.Deque;
 import java.util.Random;
 
 import model.cube.Cube;
+import model.solver.*;
 
 public class ShuffleRandom implements Shuffle
 {
@@ -19,6 +20,8 @@ public class ShuffleRandom implements Shuffle
 			int index = r.nextInt(cube.getSize());
 			cube.rotate(direction, index);
 		}
+
+		new SolverBeginner().solve(cube);
 		return rotations;
 	}
 }

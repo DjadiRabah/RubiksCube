@@ -1,5 +1,9 @@
 package model.solver;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import model.cube.Cube;
 import model.cube.piece.*;
 import model.cube.Square;
@@ -405,14 +409,83 @@ public class SolverBeginner implements Solver
 				cube.rotate(Rotation.RIGHT, 2);
 			}
 		}*/
+	}
+
+	private boolean isTopEdgesSet(Cube cube)
+	{
+		int[] colorsFaces = new int[6];
+		for(int i = 0; i < colorsFaces.length; i++)
+		{
+			colorsFaces[i] = this.getSquareColor(cube.getSquare(i));
+		}
+
+		int[][] index = {{1,0}, {2,1}, {1,2}, {0,1}};
 		
+		for(int i = Cube.LEFT; i < Cube.DOWN; i++)
+		{
+			if ((this.getSquareColor(cube.getSquare(Cube.TOP), index[i-1][0], index[i-1][1]) != this.getSquareColor(cube.getSquare(Cube.TOP)))
+				|| (this.getSquareColor(cube.getSquare(i), 0, 1)) != this.getSquareColor(cube.getSquare(i)))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private Cube[] nextCubes(Cube cube)
+	{
+		int cpt = 0;
+		Cube[] nextCubes = new Cube[18];
+
+		for(int i = 0; i < 6; i++)
+		{
+			for(int j = 0; j < 3; j++)
+			{
+				nextCubes[cpt] = new Cube(cube);
+				nextCubes[cpt].rotate(i,j); 
+				cpt++;
+			}
+		}
+
+		return nextCubes;
+	}
+
+	private Cube setWhiteCrossBruteForce(Cube cube)
+	{
+		if(cube.isSolved())
+			return cube;
+
+		Cube[] cubes = this.nextCubes(cube);
+
+		for(int i = 0; i < cubes.length; i++)
+		{
+			if(cubes[i].isSolved())
+			{
+				return cubes[i];
+			}
+		}
+		
+		for(int i = 0; i < cubes.length; i++)
+		{
+			if(setWhiteCrossBruteForce(cubes[i]).isSolved())
+				return setWhiteCrossBruteForce(cubes[i]);
+		}
+		
+		return setWhiteCrossBruteForce(cubes[i]);
 	}
 	
 	@Override
 	public void solve(Cube cube) 
 	{
+		this.setWhiteCrossBruteForce(cube);
+			/*
 		this.setWhiteTop(cube);
 		this.setWhiteCross(cube);
-		this.setWhiteFace(cube);
+		if(this.isTopEdgesSet(cube))
+			System.out.println("OUI");
+		else
+			System.out.println("NON");
+	*/
 	}
 }
