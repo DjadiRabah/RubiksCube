@@ -13,7 +13,7 @@ public class ShuffleRandom implements Shuffle
 	public Deque<Integer[]> shuffle(Cube cube)
 	{
 		Deque<Integer[]> rotations =  new ArrayDeque<>();
-		for(int i = 0; i < 100000; i++)
+		for(int i = 0; i < 3; i++)
 		{
 			Random r = new Random();
 			int direction = r.nextInt(6);
@@ -21,7 +21,7 @@ public class ShuffleRandom implements Shuffle
 			cube.rotate(direction, index);
 		}
 
-		new SolverBeginner().solve(cube);
+		new SolverBruteForce().solve(cube);
 		return rotations;
 	}
 }
