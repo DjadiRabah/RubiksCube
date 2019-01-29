@@ -1,6 +1,7 @@
 package model.shuffle;
 
 import java.util.ArrayDeque;
+
 import java.util.Deque;
 import java.util.Random;
 
@@ -12,8 +13,9 @@ public class ShuffleRandom implements Shuffle
 	@Override
 	public Deque<Integer[]> shuffle(Cube cube)
 	{
+		cube.Init();
 		Deque<Integer[]> rotations =  new ArrayDeque<>();
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < 10; i++)
 		{
 			Random r = new Random();
 			int direction = r.nextInt(6);

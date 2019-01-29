@@ -22,6 +22,17 @@ public class RotationSquare implements Rotation
 	protected void reverseRows(Square square)
     {
 		int size = square.getSize();
+		if(size == 2)
+		{
+			for(int i = 0; i < size - 1; i++)
+	    	{
+	    		Piece[] temp = square.getRow(i);
+	    		square.setRow(i, square.getRow(size - i - 1));
+	    		square.setRow(size-i-1, temp);
+	    	}
+			
+		}
+		else
     	for(int i = 0; i < size - 2; i++)
     	{
     		Piece[] temp = square.getRow(i);
@@ -33,6 +44,14 @@ public class RotationSquare implements Rotation
 	protected void reverseCols(Square square)
     {
 		int size = square.getSize();
+		if(size == 2)
+			for(int i = 0; i < size - 1; i++)
+	    	{
+	    		Piece[] temp = square.getCol(i);
+	    		square.setCol(i, square.getCol(size - i - 1));
+	    		square.setCol(size-i-1, temp);
+	    	}
+		else
     	for(int i = 0; i < size - 2; i++)
     	{
     		Piece[] temp = square.getCol(i);

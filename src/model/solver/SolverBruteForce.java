@@ -17,13 +17,38 @@ import model.rotation.Rotation;
 
 public class SolverBruteForce implements Solver
 {	
+	protected List<Integer[]> solution;
 	protected int depth;
 	protected List<Map<List<Integer[]>,Cube>> tree;
 	
 	public SolverBruteForce()
 	{
 		this.depth = 0;
+		this.solution = new ArrayList<Integer[]>();
 		this.tree = new ArrayList<Map<List<Integer[]>,Cube>>();
+	}
+	
+	public boolean isAlreadyStoredDepth(Cube cube, int depth)
+	{
+		Collection<Cube> cubes = this.tree.get(depth).values();
+		for(Cube currentCube : cubes)
+		{
+			if(currentCube.isEquals(cube))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isAlreadyStored(Cube cube)
+	{
+		for(int i = 0; i < this.depth; i++)
+		{
+			if(this.isAlreadyStoredDepth(cube, i))
+					return true;
+		}
+		return false;
 	}
 	
 	public boolean setNextDepth()
@@ -46,21 +71,29 @@ public class SolverBruteForce implements Solver
 							Integer[] rotation = new Integer[2];
 							rotation[0] = Integer.valueOf(direction);
 							rotation[1] = Integer.valueOf(index);
-							
-							
+									
 							Cube newCube = new Cube(currentCube);
 							newCube.rotate(rotation);
 							
-							isSolved = newCube.isSolved();
-							
-							List<Integer[]> newRotations = new ArrayList<>(currentRotations);
-							newRotations.add(rotation);
-							
-							data.put(newRotations, newCube);
-							if(isSolved)
+							if(!this.isAlreadyStored(newCube))
 							{
-								this.tree.add(data);
-								return true;
+								for(int currentFace = 0; currentFace < 6; currentFace++)
+								{
+									isSolved = newCube.isFaceSolved(currentFace) || newCube.isCrossSolved(currentFace);
+									if(isSolved)
+										break;
+								}
+								
+								List<Integer[]> newRotations = new ArrayList<>(currentRotations);
+								newRotations.add(rotation);
+								
+								data.put(newRotations, newCube);
+								if(isSolved)
+								{
+									this.solution = newRotations;
+									this.tree.add(data);
+									return true;
+								}
 							}
 						}
 				}
@@ -83,13 +116,10 @@ public class SolverBruteForce implements Solver
 			isSolved = this.setNextDepth();
 		} while(!isSolved);
 		
-		Set<List<Integer[]>> rotations = this.tree.get(this.depth).keySet();
-		for(int i = 0; i < rotations.size(); i++)
+		for(int i = 0; i < this.solution.size(); i++)
 		{
-			List<Integer[]> currentRotations = (ArrayList<Integer[]>) rotations.toArray()[i];
-			for(int j = 0; j < currentRotations.size(); j++)
-				System.out.print(currentRotations.get(j)[0] + " " + currentRotations.get(j)[1] + " ");
-			System.out.println();
+				System.out.print(this.solution.get(i)[0] + " " + this.solution.get(i)[1] + " ");
+				System.out.println();
 		}
 	}
 }

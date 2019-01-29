@@ -41,7 +41,7 @@ public class SolverBeginner implements Solver
 		
 		for(Cube currentCube : cubes)
 		{
-			if(currentCube.isTopSolved())
+			if(currentCube.isSolved())
 			{
 				System.out.println(depth);
 				System.out.println(currentCube);
