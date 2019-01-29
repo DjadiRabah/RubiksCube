@@ -30,11 +30,7 @@ public class Cube implements Observable, Observer
 	{
 		this.size = size;
 		this.squares = new Square[6];
-		
-		for(int color = 0; color < 6; color++)
-		{
-			this.squares[color] = new Square(this.size,color);
-		}
+		this.Init();
 		this.observers = new ArrayList<>();
 	}
 	
@@ -47,6 +43,14 @@ public class Cube implements Observable, Observer
 			this.squares[i] = new Square(copy.getSquare(i));
 		}
 		this.observers = new ArrayList<>();
+	}
+	
+	public void Init()
+	{
+		for(int color = 0; color < 6; color++)
+		{
+			this.squares[color] = new Square(this.size,color);
+		}
 	}
 	
 	public void shuffle(Shuffle s)
@@ -62,6 +66,24 @@ public class Cube implements Observable, Observer
 	public int getSize()
 	{
 		return this.size;
+	}
+	
+	/* Pour un cube 3 * 3 */
+	public boolean isCrossSolved(int face)
+	{
+		int[][] colors = this.squares[face].getColors();
+		int color = colors[1][1];
+		for(int i = 0; i < 3; i=i+2)
+		{
+			if ((colors[i][1] != color) || (colors[1][i] != color))
+				return false;
+		}
+		
+		return true;
+	}
+	public boolean isFaceSolved(int face)
+	{
+		return this.squares[face].isSolved();
 	}
 	
 	public boolean isSolved()
@@ -107,14 +129,18 @@ public class Cube implements Observable, Observer
 		}
 	}
 	
-	public boolean isSameCube(Cube cube)
+	public boolean isEquals(Cube cube)
 	{
-		for(int i = Cube.TOP; i < Cube.DOWN; i++)
+		for(int i = Cube.TOP; i < Cube.DOWN + 1; i++)
 		{
-			if(!Arrays.deepEquals(this.squares[i].getColors(), cube.squares[i].getColors()))
-			{
-				return false;
-			}
+			int[][] colorA = this.squares[i].getColors();
+			int[][] colorB = cube.squares[i].getColors();
+			for(int j = 0; j < colorA.length; j++)
+				for(int k = 0; k < colorA.length; k++)		
+					if(colorA[j][k] != colorB[j][k])
+					{
+						return false;
+					}
 		}
 		
 		return true;

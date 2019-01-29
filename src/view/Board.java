@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import listener.ControllerRotation;
+import listener.IndexController;
 import model.cube.Cube;
 import model.rotation.RotationObserver;
 
