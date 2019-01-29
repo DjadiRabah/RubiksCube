@@ -30,7 +30,11 @@ public class Cube implements Observable, Observer
 	{
 		this.size = size;
 		this.squares = new Square[6];
-		this.Init();
+		
+		for(int color = 0; color < 6; color++)
+		{
+			this.squares[color] = new Square(this.size,color);
+		}
 		this.observers = new ArrayList<>();
 	}
 	
@@ -43,14 +47,6 @@ public class Cube implements Observable, Observer
 			this.squares[i] = new Square(copy.getSquare(i));
 		}
 		this.observers = new ArrayList<>();
-	}
-	
-	public void Init()
-	{
-		for(int color = 0; color < 6; color++)
-		{
-			this.squares[color] = new Square(this.size,color);
-		}
 	}
 	
 	public void shuffle(Shuffle s)
@@ -66,24 +62,6 @@ public class Cube implements Observable, Observer
 	public int getSize()
 	{
 		return this.size;
-	}
-	
-	/* Pour un cube 3 * 3 */
-	public boolean isCrossSolved(int face)
-	{
-		int[][] colors = this.squares[face].getColors();
-		int color = colors[1][1];
-		for(int i = 0; i < 3; i=i+2)
-		{
-			if ((colors[i][1] != color) || (colors[1][i] != color))
-				return false;
-		}
-		
-		return true;
-	}
-	public boolean isFaceSolved(int face)
-	{
-		return this.squares[face].isSolved();
 	}
 	
 	public boolean isSolved()
@@ -108,13 +86,34 @@ public class Cube implements Observable, Observer
 	
 	public void rotate(int direction)
 	{
-		this.notifyObservers() ;
+		this.notifyObservers();
 		new RotationCube().rotate(this,direction);
 	}
 	
 	public void rotate(int direction, int index)
 	{
-		this.notifyObservers() ;
+		this.notifyObservers();
+		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
+		{
+			new RotationX().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.UP) || (direction == Rotation.DOWN))
+		{
+			new RotationY().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.CLOCKWISE) || (direction == Rotation.COUNTERCLOCKWISE))
+		{
+			new RotationZ().rotate(this, direction, index);
+		}
+	}
+
+	public void rotateInvert(int direction, int index)
+	{
+		direction++;
+		if((direction%2) == 0)
+			direction--;
+
+		this.notifyObservers();
 		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
 		{
 			new RotationX().rotate(this, direction, index);
@@ -129,18 +128,14 @@ public class Cube implements Observable, Observer
 		}
 	}
 	
-	public boolean isEquals(Cube cube)
+	public boolean isSameCube(Cube cube)
 	{
-		for(int i = Cube.TOP; i < Cube.DOWN + 1; i++)
+		for(int i = Cube.TOP; i < Cube.DOWN; i++)
 		{
-			int[][] colorA = this.squares[i].getColors();
-			int[][] colorB = cube.squares[i].getColors();
-			for(int j = 0; j < colorA.length; j++)
-				for(int k = 0; k < colorA.length; k++)		
-					if(colorA[j][k] != colorB[j][k])
-					{
-						return false;
-					}
+			if(!Arrays.deepEquals(this.squares[i].getColors(), cube.squares[i].getColors()))
+			{
+				return false;
+			}
 		}
 		
 		return true;
