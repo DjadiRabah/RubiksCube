@@ -1,6 +1,7 @@
 package model.solver;
 
 import java.util.List;
+import java.util.ArrayList;
 import model.cube.Cube;
 import model.cube.piece.*;
 import model.cube.Square;
@@ -8,17 +9,30 @@ import model.rotation.Rotation;
 
 public class SolverBruteForceSecond implements Solver
 {
-	private int min = 40;
+	private int minSteps = 40;
 	private List<Integer[]> bestCombination;
 
-	public List<Integer[]> solveCube(Cube c, int numberStep, List<Integer[]> previousSteps)
+	public SolverBruteForceSecond()
 	{
-		if(numberStep >= this.min)
+		this.bestCombination = new ArrayList<>();
+	}
+
+	public startSolver(Cube c)
+	{
+		//List<Integer[]> l = new ArrayList<>();
+		this.solveCube(c, 0, l);
+		//this.bestCombination = l;
+	}
+
+	private List<Integer[]> solveCube(Cube c, int numberStep, List<Integer[]> stepsList)
+	{
+		if(numberStep >= this.minSteps)
 			return null;
 
 		if(c.isSolved())
 		{
-			return previousSteps;
+			this.minSteps = numberStep;
+			return stepsList;
 		}
 
 		int cubeSize = c.getSize();
@@ -28,19 +42,26 @@ public class SolverBruteForceSecond implements Solver
 			{
 				c.rotate(i, j);
 
-				numberStep++;
 				int[] actualStep = {i, j};
-				previousSteps.add(actualStep);
+				stepsList.add(actualStep);
 
-				previousSteps = solveCube(c, numberStep, previousSteps);
+				stepsList = solveCube(c, (numberStep + 1), stepsList);
 
-				if((steps != null) 
+				if(stepsList != null)
 				{
-					bestCombination = steps;
+					this.bestCombination = steps;
+				}
+
+				//probleme nullpointerexception (je pense)
+				for(int k = tmp; k < stepsList.size(); k++)
+				{
+					stepsList.remove(k);
 				}
 
 				c.rotateInvert(i, j);
 			}
 		}
+
+		return bestCombination;
 	}
 }
