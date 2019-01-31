@@ -17,17 +17,13 @@ public class SolverBruteForceSecond implements Solver
 		this.bestCombination = new ArrayList<>();
 	}
 
-	public startSolver(Cube c)
-	{
-		//List<Integer[]> l = new ArrayList<>();
-		this.solveCube(c, 0, l);
-		//this.bestCombination = l;
-	}
-
 	private List<Integer[]> solveCube(Cube c, int numberStep, List<Integer[]> stepsList)
 	{
 		if(numberStep >= this.minSteps)
-			return null;
+		{
+			stepsList.add(null);
+			return stepsList;
+		}
 
 		if(c.isSolved())
 		{
@@ -47,12 +43,11 @@ public class SolverBruteForceSecond implements Solver
 
 				stepsList = solveCube(c, (numberStep + 1), stepsList);
 
-				if(stepsList != null)
+				if(stepsList.get(stepsList.size() - 1) != null)
 				{
-					this.bestCombination = steps;
+					this.setBestCombination(stepsList);
 				}
 
-				//probleme nullpointerexception (je pense)
 				for(int k = tmp; k < stepsList.size(); k++)
 				{
 					stepsList.remove(k);
@@ -63,5 +58,20 @@ public class SolverBruteForceSecond implements Solver
 		}
 
 		return bestCombination;
+	}
+
+	private void setBestCombination(List<Integer[]> steps)
+	{
+		this.bestCombination.removeRange(0, this.bestCombination.size() - 1);
+
+		for(int i=0; i < steps.size(); i++)
+		{
+			this.bestCombination.add(steps.get(i));
+		}
+	}
+
+	public List<Integer[]> getBestCombination()
+	{
+		return this.bestCombination;
 	}
 }
