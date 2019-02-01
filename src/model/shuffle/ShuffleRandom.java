@@ -15,7 +15,7 @@ public class ShuffleRandom implements Shuffle
 	{
 		cube.Init();
 		Deque<Integer[]> rotations =  new ArrayDeque<>();
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 5; i++)
 		{
 			Random r = new Random();
 			int direction = r.nextInt(6);
@@ -23,7 +23,7 @@ public class ShuffleRandom implements Shuffle
 			cube.rotate(direction, index);
 		}
 
-		new SolverBruteForce().solve(cube);
+		new SolverBruteForceSecond().solve(cube);
 		return rotations;
 	}
 }

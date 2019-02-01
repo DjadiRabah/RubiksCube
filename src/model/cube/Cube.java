@@ -68,19 +68,19 @@ public class Cube implements Observable, Observer
 		return this.size;
 	}
 	
-	/* Pour un cube 3 * 3 */
-	public boolean isCrossSolved(int face)
+	public int getTopFace(int face)
 	{
-		int[][] colors = this.squares[face].getColors();
-		int color = colors[1][1];
-		for(int i = 0; i < 3; i=i+2)
-		{
-			if ((colors[i][1] != color) || (colors[1][i] != color))
-				return false;
-		}
+		int top = -1;
+		if(face >= Cube.LEFT && face <= Cube.BACK)
+			top = Cube.TOP;
+		else if(face == Cube.TOP)
+			top = Cube.BACK;
+		else
+			top = Cube.FRONT;
 		
-		return true;
+		return top;
 	}
+	
 	public boolean isFaceSolved(int face)
 	{
 		return this.squares[face].isSolved();
@@ -115,6 +115,27 @@ public class Cube implements Observable, Observer
 	public void rotate(int direction, int index)
 	{
 		this.notifyObservers() ;
+		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
+		{
+			new RotationX().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.UP) || (direction == Rotation.DOWN))
+		{
+			new RotationY().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.CLOCKWISE) || (direction == Rotation.COUNTERCLOCKWISE))
+		{
+			new RotationZ().rotate(this, direction, index);
+		}
+	}
+	
+	public void rotateInvert(int direction, int index)
+	{
+		direction++;
+		if((direction%2) == 0)
+			direction--;
+
+		this.notifyObservers();
 		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
 		{
 			new RotationX().rotate(this, direction, index);

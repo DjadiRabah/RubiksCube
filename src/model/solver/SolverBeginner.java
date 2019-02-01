@@ -89,7 +89,7 @@ public class SolverBeginner implements Solver
 	}
 
 	@Override
-	public void solve(Cube cube) 
+	public ArrayList<Integer[]> solve(Cube cube) 
 	{
 	}
 }
