@@ -108,13 +108,34 @@ public class Cube implements Observable, Observer
 	
 	public void rotate(int direction)
 	{
-		this.notifyObservers() ;
+		this.notifyObservers();
 		new RotationCube().rotate(this,direction);
 	}
 	
 	public void rotate(int direction, int index)
 	{
-		this.notifyObservers() ;
+		this.notifyObservers();
+		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
+		{
+			new RotationX().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.UP) || (direction == Rotation.DOWN))
+		{
+			new RotationY().rotate(this, direction, index);
+		}
+		else if ((direction == Rotation.CLOCKWISE) || (direction == Rotation.COUNTERCLOCKWISE))
+		{
+			new RotationZ().rotate(this, direction, index);
+		}
+	}
+
+	public void rotateInvert(int direction, int index)
+	{
+		direction++;
+		if((direction%2) == 0)
+			direction--;
+
+		this.notifyObservers();
 		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
 		{
 			new RotationX().rotate(this, direction, index);

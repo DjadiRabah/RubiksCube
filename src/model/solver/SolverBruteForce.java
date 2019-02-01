@@ -51,6 +51,7 @@ public class SolverBruteForce implements Solver
 		return false;
 	}
 	
+<<<<<<< HEAD
 	public boolean isEdgeTopSolved(Cube cube, int i, int j)
 	{
 		int[][] index1 = {{0,1},{1,0},{1,2},{2,1}};
@@ -317,6 +318,8 @@ public class SolverBruteForce implements Solver
 		return edgeSolved;
 	}
 	
+=======
+>>>>>>> d298fa99d525ddaf36868af351e73b45588e8b7d
 	public boolean setNextDepth()
 	{
 		boolean isSolved = false;
@@ -345,6 +348,7 @@ public class SolverBruteForce implements Solver
 							{
 								for(int currentFace = 0; currentFace < 6; currentFace++)
 								{
+<<<<<<< HEAD
 									isSolved = this.isCrossSolved(newCube,Cube.TOP);
 					
 									if(isSolved)
@@ -354,6 +358,13 @@ public class SolverBruteForce implements Solver
 								}
 								
 								
+=======
+									isSolved = newCube.isFaceSolved(currentFace) || newCube.isCrossSolved(currentFace);
+									if(isSolved)
+										break;
+								}
+								
+>>>>>>> d298fa99d525ddaf36868af351e73b45588e8b7d
 								List<Integer[]> newRotations = new ArrayList<>(currentRotations);
 								newRotations.add(rotation);
 								
@@ -388,7 +399,11 @@ public class SolverBruteForce implements Solver
 		
 		for(int i = 0; i < this.solution.size(); i++)
 		{
+<<<<<<< HEAD
 				System.out.print((this.solution.get(i)[0] + 1) + " " + (this.solution.get(i)[1] + 1) + " ");
+=======
+				System.out.print(this.solution.get(i)[0] + " " + this.solution.get(i)[1] + " ");
+>>>>>>> d298fa99d525ddaf36868af351e73b45588e8b7d
 				System.out.println();
 		}
 		
