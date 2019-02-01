@@ -10,63 +10,68 @@ import model.rotation.Rotation;
 public class SolverBruteForceSecond implements Solver
 {
 	private int minSteps = 40;
-	private List<Integer[]> bestCombination;
+	private List<Integer[]> bestCombination, stepsList;
+	private Cube c;
+	private int cubeSize;
 
-	public SolverBruteForceSecond()
+	public SolverBruteForceSecond(Cube c)
 	{
 		this.bestCombination = new ArrayList<>();
+		this.stepsList = new ArrayList<>();
+		this.c = c;
+		this.cubeSize =  = this.c.getSize();
 	}
 
-	private List<Integer[]> solveCube(Cube c, int numberStep, List<Integer[]> stepsList)
+	private List<Integer[]> solveCube(int numberStep)
 	{
 		if(numberStep >= this.minSteps)
 		{
-			stepsList.add(null);
-			return stepsList;
+			this.stepsList.add(null);
+			return this.stepsList;
 		}
 
-		if(c.isSolved())
+		if(this.c.isSolved())
 		{
 			this.minSteps = numberStep;
-			return stepsList;
+			return this.stepsList;
 		}
 
-		int cubeSize = c.getSize();
+		
 		for(int i = 0; i < 6; i++)
 		{
-			for(int j = 0; j < cubeSize; j++)
+			for(int j = 0; j < this.cubeSize; j++)
 			{
 				c.rotate(i, j);
 
 				int[] actualStep = {i, j};
-				stepsList.add(actualStep);
+				this.stepsList.add(actualStep);
 
-				stepsList = solveCube(c, (numberStep + 1), stepsList);
+				this.stepsList = solveCube(numberStep + 1);
 
-				if(stepsList.get(stepsList.size() - 1) != null)
+				if(this.stepsList.get(this.stepsList.size() - 1) != null)
 				{
-					this.setBestCombination(stepsList);
+					this.setBestCombination();
 				}
 
-				for(int k = tmp; k < stepsList.size(); k++)
+				for(int k = numberStep; k < this.stepsList.size(); k++)
 				{
-					stepsList.remove(k);
+					this.stepsList.remove(k);
 				}
 
-				c.rotateInvert(i, j);
+				this.c.rotateInvert(i, j);
 			}
 		}
 
 		return bestCombination;
 	}
 
-	private void setBestCombination(List<Integer[]> steps)
+	private void setBestCombination()
 	{
 		this.bestCombination.removeRange(0, this.bestCombination.size() - 1);
 
-		for(int i=0; i < steps.size(); i++)
+		for(int i=0; i < this.steps.size(); i++)
 		{
-			this.bestCombination.add(steps.get(i));
+			this.bestCombination.add(this.steps.get(i));
 		}
 	}
 
