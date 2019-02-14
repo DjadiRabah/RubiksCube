@@ -120,6 +120,16 @@ public class Square
 		return colors;
 	}
 	
+	public int getColor()
+	{
+		return this.pieces[(this.size-1)/2][(this.size-1)/2].getColor();
+	}
+	
+	public int getColor(int i, int j)
+	{
+		return this.pieces[i][j].getColor();
+	}
+	
 	/**
      * Renvoie le nombre de pieces sur une ligne/colonne de la face du cube
      * 
@@ -282,6 +292,23 @@ public class Square
 			}
 		}
 		return true;
+	}
+	
+	public int getNumberRightColor()
+	{
+		int[][] colors = this.getColors();
+		int value = 0;
+		for(int i = 0; i < this.size; i++)
+		{
+			for(int j = 0; j < this.size; j++)
+			{
+				if(colors[i][j] == colors[(this.size-1)/2][(this.size-1)/2])
+				{
+					value = value + 1;
+				}
+			}
+		}
+		return value;
 	}
 	
 	/**

@@ -14,12 +14,10 @@ public class SolverBruteForceSecond implements Solver
 	private Cube c;
 	private int cubeSize;
 
-	public SolverBruteForceSecond(Cube c)
+	public SolverBruteForceSecond()
 	{
 		this.bestCombination = new ArrayList<>();
 		this.stepsList = new ArrayList<>();
-		this.c = c;
-		this.cubeSize =  = this.c.getSize();
 	}
 
 	private ArrayList<Integer[]> solveCube(int numberStep)
@@ -44,7 +42,6 @@ public class SolverBruteForceSecond implements Solver
 				c.rotate(i, j);
 
 				Integer[] actualStep = {i, j};
-
 				this.stepsList.add(actualStep);
 
 				this.stepsList = solveCube(numberStep + 1);
@@ -82,11 +79,10 @@ public class SolverBruteForceSecond implements Solver
 	}
 
 	@Override
-	public ArrayList<Integer[]> solve(Cube cube) 
+	public void solve(Cube cube) 
 	{
 		this.c = cube;
 		this.cubeSize = this.c.getSize();
 		
-		return this.solveCube(0);
 	}
 }

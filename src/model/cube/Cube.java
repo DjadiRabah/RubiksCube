@@ -45,6 +45,31 @@ public class Cube implements Observable, Observer
 		this.observers = new ArrayList<>();
 	}
 	
+	public int getColor(int face)
+	{
+		return this.squares[face].getColor();
+	}
+	
+	public int getColor(int face, int i, int j)
+	{
+		return this.squares[face].getColor(i,j);
+		
+	}
+	
+	/*
+	 * TOP, LEFT, RIGHT, DOWN
+	 */
+	public int getFace(int face, int direction)
+	{
+		int[][] faces = {{Cube.BACK, Cube.LEFT, Cube.RIGHT, Cube.FRONT},
+						{Cube.TOP, Cube.BACK, Cube.FRONT, Cube.DOWN},
+						{Cube.TOP, Cube.LEFT, Cube.RIGHT, Cube.DOWN},
+						{Cube.TOP, Cube.FRONT, Cube.BACK, Cube.DOWN},
+						{Cube.TOP, Cube.RIGHT, Cube.LEFT, Cube.DOWN},
+						{Cube.FRONT, Cube.LEFT, Cube.RIGHT, Cube.BACK}};
+		return faces[face][direction];
+	}
+	
 	public void Init()
 	{
 		for(int color = 0; color < 6; color++)
@@ -108,34 +133,13 @@ public class Cube implements Observable, Observer
 	
 	public void rotate(int direction)
 	{
-		this.notifyObservers();
+		this.notifyObservers() ;
 		new RotationCube().rotate(this,direction);
 	}
 	
 	public void rotate(int direction, int index)
 	{
-		this.notifyObservers();
-		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
-		{
-			new RotationX().rotate(this, direction, index);
-		}
-		else if ((direction == Rotation.UP) || (direction == Rotation.DOWN))
-		{
-			new RotationY().rotate(this, direction, index);
-		}
-		else if ((direction == Rotation.CLOCKWISE) || (direction == Rotation.COUNTERCLOCKWISE))
-		{
-			new RotationZ().rotate(this, direction, index);
-		}
-	}
-
-	public void rotateInvert(int direction, int index)
-	{
-		direction++;
-		if((direction%2) == 0)
-			direction--;
-
-		this.notifyObservers();
+		this.notifyObservers() ;
 		if ((direction == Rotation.RIGHT) || (direction == Rotation.LEFT))
 		{
 			new RotationX().rotate(this, direction, index);
@@ -169,6 +173,16 @@ public class Cube implements Observable, Observer
 		{
 			new RotationZ().rotate(this, direction, index);
 		}
+	}
+	
+	public int getNumberRightColor()
+	{
+		int value = 0;
+		for(int i = 0; i < 6; i++)
+		{
+			value = value + this.squares[i].getNumberRightColor();
+		}
+		return value;
 	}
 	
 	public boolean isEquals(Cube cube)
