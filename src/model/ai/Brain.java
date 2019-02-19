@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Brain 
 {
+	/*
 	protected int step;
 	protected ArrayList<Integer[]> rotations;
 	protected int cubeSize;
@@ -68,4 +69,5 @@ public class Brain
 			this.rotations.set(r.nextInt(this.rotations.size()),new Integer[] {direction,index});
 		}
 	}
+	*/
 }

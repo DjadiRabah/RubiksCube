@@ -18,6 +18,7 @@ import model.rotation.Rotation;
 
 public class IDA implements Solver
 {	
+	/*
 	protected List<Integer[]> solution;
 	protected int depth;
 	protected List<Map<List<Integer[]>,Cube>> tree;
@@ -161,10 +162,12 @@ public class IDA implements Solver
 
 		return edgeSolved;
 	}
+	*/
 	
 	
 	
 	/* Pour un cube 3 * 3 */
+	/*
 	public boolean isCrossSolved(Cube cube, int face)
 	{
 		int[][] index1 = {{0,1},{1,0},{1,2},{2,1}};
@@ -376,7 +379,7 @@ public class IDA implements Solver
 
 	@Override
 	public void solve(Cube cube) 
-	{
+	{*/
 		/*
 		Map<List<Integer[]>,Cube> cubes = new HashMap<>();
 		cubes.put(new ArrayList<Integer[]>(), cube);
@@ -394,7 +397,7 @@ public class IDA implements Solver
 				System.out.println();
 		}
 		*/
-		
+		/*
 		Population population = new Population(50000,cube);
 		while(!population.hasSolved())
 		{
@@ -423,23 +426,10 @@ public class IDA implements Solver
 					System.out.println();
 			}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	}*/
+	@Override
+	public void solve(Cube cube) 
+	{
 		
 	}
 }

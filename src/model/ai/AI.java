@@ -6,6 +6,7 @@ import model.cube.Cube;
 
 public class AI 
 {
+	/*
 	protected boolean isDead;
 	protected boolean solved;
 	protected Brain brain;
@@ -50,6 +51,7 @@ public class AI
 		this.fitness = 0;
 		this.isBestAi = false;
 	}
+
 	
 	public void setBest(boolean isBest)
 	{
@@ -148,6 +150,7 @@ public class AI
 	{
 		return this.brain.getRotations();
 	}
+	*/
 	
 
 }

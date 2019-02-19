@@ -7,6 +7,7 @@ import model.rotation.Rotation;
 
 public class FirstTwoLayers implements Solver
 {
+	/*
 	public void addRotation(ArrayList<Integer[]> rotations, int direction, int index, int n)
 	{
 		for(int i = 0; i < n; i++)
@@ -140,6 +141,13 @@ public class FirstTwoLayers implements Solver
 		{
 			cube.rotate(rotations.get(i));
 		}
+	}
+	*/
+
+	@Override
+	public void solve(Cube cube) 
+	{
+		
 	}
 
 }

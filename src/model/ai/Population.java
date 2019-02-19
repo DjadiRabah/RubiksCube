@@ -6,6 +6,7 @@ import model.cube.Cube;
 
 public class Population 
 {
+	/*
 	protected AI[] ais;
 	protected Cube cube;
 	protected int generation;
@@ -156,5 +157,6 @@ public class Population
 			this.ais[i].getBrain().mutate();
 		}
 	}
+	*/
 
 }

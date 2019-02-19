@@ -53,8 +53,9 @@ public class Cube implements Observable, Observer
 	public int getColor(int face, int i, int j)
 	{
 		return this.squares[face].getColor(i,j);
-		
 	}
+
+
 	
 	/*
 	 * TOP, LEFT, RIGHT, DOWN
