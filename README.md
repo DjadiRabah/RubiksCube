@@ -13,7 +13,7 @@ Version 1.0 17/10/2018
  ![unsolvedCube](https://dwarves.iut-fbleau.fr/git/djadi/RubiksCube/raw/master/Ressources/UnsolvedCube.png)
  
  Version 2.0 03/03/2019
- - Ajouts de fonctionnalités permettant :
+ - Ajouts de fonctionnalités permettant : 
      -de résoudre un cube 3x3
 
 ## Langages
