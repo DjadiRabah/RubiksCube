@@ -6,6 +6,7 @@ Projet d'une application Android de Rubik's Cube permettant de jouer ou de lance
  Version 2.0 03/03/2019  
  - Ajouts de fonctionnalités permettant :   
      - de résoudre un cube 3x3
+     - de lancer un test unitaire (JUnit) sur le solveur
      
 Version 1.0 17/10/2018
  - Ajouts de fonctionnalités permettant :
