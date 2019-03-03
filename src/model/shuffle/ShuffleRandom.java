@@ -7,6 +7,7 @@ import java.util.Random;
 
 import model.cube.Cube;
 import model.solver.*;
+import model.solver.beginner.SolverBeginner;
 
 public class ShuffleRandom implements Shuffle
 {

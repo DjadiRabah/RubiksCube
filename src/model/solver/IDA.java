@@ -16,7 +16,7 @@ import model.rotation.Rotation;
 
 
 
-public class IDA extends Solver
+public class IDA implements Solver
 {	
 	/*
 	protected List<Integer[]> solution;
@@ -427,7 +427,7 @@ public class IDA extends Solver
 			}
 		
 	}*/
-	@Override
+
 	public void solve(Cube cube) 
 	{
 		

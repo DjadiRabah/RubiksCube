@@ -1,12 +1,13 @@
-package model.solver;
+package model.solver.beginner.components;
 
 import java.util.ArrayList;
 
 import event.RotationEvent;
 import model.cube.Cube;
 import model.rotation.Rotation;
+import model.solver.SolverComponent;
 
-public class SolverCrossTop extends Solver
+public class SolverCrossTop extends SolverComponent
 {
 
 	public SolverCrossTop() 
@@ -94,14 +95,12 @@ public class SolverCrossTop extends Solver
 	}
 
 	@Override
-	public void solve(Cube cube) 
+	public ArrayList<RotationEvent> solve(Cube cube) 
 	{
-		Cube copy = new Cube(cube);
-		
-		while(!this.checkCross(copy))
+		while(!this.checkCross(cube))
 		{
 			ArrayList<RotationEvent> newRotations = new ArrayList<RotationEvent>();
-			if(this.checkHorizontalLine(copy))
+			if(this.checkHorizontalLine(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.CLOCKWISE,0));
 				newRotations.add(new RotationEvent(Rotation.UP,2));
@@ -111,7 +110,7 @@ public class SolverCrossTop extends Solver
 				newRotations.add(new RotationEvent(Rotation.COUNTERCLOCKWISE,0));
 			}
 			
-			else if(this.checkVerticalLine(copy))
+			else if(this.checkVerticalLine(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.add(new RotationEvent(Rotation.CLOCKWISE,0));
@@ -122,7 +121,7 @@ public class SolverCrossTop extends Solver
 				newRotations.add(new RotationEvent(Rotation.COUNTERCLOCKWISE,0));
 			}
 			
-			else if(this.checkLeftTopL(copy))
+			else if(this.checkLeftTopL(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.CLOCKWISE,0));
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
@@ -132,7 +131,7 @@ public class SolverCrossTop extends Solver
 				newRotations.add(new RotationEvent(Rotation.COUNTERCLOCKWISE,0));
 			}
 			
-			else if(this.checkTopRightL(copy))
+			else if(this.checkTopRightL(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 				newRotations.add(new RotationEvent(Rotation.CLOCKWISE,0));
@@ -143,7 +142,7 @@ public class SolverCrossTop extends Solver
 				newRotations.add(new RotationEvent(Rotation.COUNTERCLOCKWISE,0));
 			}
 			
-			else if(this.checkBotRightL(copy))
+			else if(this.checkBotRightL(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,0));
@@ -155,7 +154,7 @@ public class SolverCrossTop extends Solver
 				newRotations.add(new RotationEvent(Rotation.COUNTERCLOCKWISE,0));
 			}
 			
-			else if(this.checkBotLeftL(copy))
+			else if(this.checkBotLeftL(cube))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.add(new RotationEvent(Rotation.CLOCKWISE,0));
@@ -179,16 +178,10 @@ public class SolverCrossTop extends Solver
 			for(int i = 0; i < newRotations.size(); i++)
 			{
 				RotationEvent rotation = newRotations.get(i);
-				copy.rotate(rotation.getDirection(),rotation.getIndex());
+				cube.rotate(rotation.getDirection(),rotation.getIndex());
 			}
 			this.rotations.addAll(newRotations);
 		}
-	
-		for(int i = 0; i < this.rotations.size(); i++)
-		{
-			RotationEvent rotation = this.rotations.get(i);
-			cube.rotate(rotation.getDirection(),rotation.getIndex());
-		}
+		return this.rotations;
 	}
-
 }

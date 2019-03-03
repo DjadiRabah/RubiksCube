@@ -1,12 +1,13 @@
-package model.solver;
+package model.solver.beginner.components;
 
 import java.util.ArrayList;
 
 import event.RotationEvent;
 import model.cube.Cube;
 import model.rotation.Rotation;
+import model.solver.SolverComponent;
 
-public class SolverBeginnerCornersTop extends Solver
+public class SolverBeginnerCornersTop extends SolverComponent
 {
 	public SolverBeginnerCornersTop() 
 	{
@@ -81,62 +82,60 @@ public class SolverBeginnerCornersTop extends Solver
 	}
 
 	@Override
-	public void solve(Cube cube) 
-	{
-		Cube copy = new Cube(cube);
-		
-		while (!this.checkLeftBack(copy) || !this.checkLeftFront(copy)
-				|| !this.checkRightBack(copy) || !this.checkRightFront(copy))
+	public ArrayList<RotationEvent> solve(Cube cube) 
+	{	
+		while (!this.checkLeftBack(cube) || !this.checkLeftFront(cube)
+				|| !this.checkRightBack(cube) || !this.checkRightFront(cube))
 		{
 			int max = 0;
 			int corners = 0;
 			for(int i = 0; i < 4; i++)
 			{
-				if (this.checkLeftBack(copy))
+				if (this.checkLeftBack(cube))
 				{
 					corners++;
 				}
-				if (this.checkLeftFront(copy))
+				if (this.checkLeftFront(cube))
 				{
 					corners++;
 				}
-				if (this.checkRightBack(copy))
+				if (this.checkRightBack(cube))
 				{
 					corners++;
 				}
-				if (this.checkRightFront(copy))
+				if (this.checkRightFront(cube))
 				{
 					corners++;
 				}
 				if(corners > max)
 					max = corners;
-				copy.rotate(Rotation.LEFT, 0);
+				cube.rotate(Rotation.LEFT, 0);
 				corners = 0;
 			}
 			ArrayList<RotationEvent> newRotations = new ArrayList<RotationEvent>();
 			while(corners != max)
 			{
 				corners = 0;
-				if (this.checkLeftBack(copy))
+				if (this.checkLeftBack(cube))
 				{
 					corners++;
 				}
-				if (this.checkLeftFront(copy))
+				if (this.checkLeftFront(cube))
 				{
 					corners++;
 				}
-				if (this.checkRightBack(copy))
+				if (this.checkRightBack(cube))
 				{
 					corners++;
 				}
-				if (this.checkRightFront(copy))
+				if (this.checkRightFront(cube))
 				{
 					corners++;
 				}
 				if(corners != max)
 				{
 					newRotations.add(new RotationEvent(Rotation.LEFT,0));
-					copy.rotate(Rotation.LEFT,0);
+					cube.rotate(Rotation.LEFT,0);
 				}
 			}
 			
@@ -145,19 +144,19 @@ public class SolverBeginnerCornersTop extends Solver
 			
 			if(max == 2)
 			{
-				if(this.checkLeftBack(copy) && this.checkLeftFront(copy))
+				if(this.checkLeftBack(cube) && this.checkLeftFront(cube))
 				{
 					newRotations.add(new RotationEvent(Rotation.LEFT,0));
 					newRotations.add(new RotationEvent(Rotation.LEFT,1));
 					newRotations.add(new RotationEvent(Rotation.LEFT,2));
 				}
-				else if(this.checkRightBack(copy) && this.checkRightFront(copy))
+				else if(this.checkRightBack(cube) && this.checkRightFront(cube))
 				{
 					newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 					newRotations.add(new RotationEvent(Rotation.RIGHT,1));
 					newRotations.add(new RotationEvent(Rotation.RIGHT,2));
 				}
-				else if(this.checkRightFront(copy) && this.checkLeftFront(copy))
+				else if(this.checkRightFront(cube) && this.checkLeftFront(cube))
 				{
 					newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 					newRotations.add(new RotationEvent(Rotation.RIGHT,1));
@@ -168,19 +167,13 @@ public class SolverBeginnerCornersTop extends Solver
 				}
 				newRotations.addAll(this.solveCorners());
 			}
-			
 			this.rotations.addAll(newRotations);
 			for(int i = 0; i < newRotations.size(); i++)
 			{
 				RotationEvent rotation = newRotations.get(i);
-				copy.rotate(rotation.getDirection(),rotation.getIndex());
+				cube.rotate(rotation.getDirection(),rotation.getIndex());
 			}
 		}
-		
-		for(int i = 0; i < this.rotations.size(); i++)
-		{
-			RotationEvent rotation = this.rotations.get(i);
-			cube.rotate(rotation.getDirection(),rotation.getIndex());
-		}	
+		return this.rotations;
 	}
 }

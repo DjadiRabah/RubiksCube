@@ -1,12 +1,13 @@
-package model.solver;
+package model.solver.beginner.components;
 
 import java.util.ArrayList;
 
 import event.RotationEvent;
 import model.cube.Cube;
 import model.rotation.Rotation;
+import model.solver.SolverComponent;
 
-public class SecondLayer extends Solver
+public class SecondLayer extends SolverComponent
 {
 	public SecondLayer() 
 	{
@@ -42,12 +43,9 @@ public class SecondLayer extends Solver
 	}
 
 	@Override
-	public void solve(Cube cube)
-	{
-		Cube copy = new Cube(cube);
-		
-		/* on place la face deja faite en bas */
-		for(int i = 0; i < copy.getSize(); i++)
+	public ArrayList<RotationEvent> solve(Cube cube)
+	{		
+		for(int i = 0; i < cube.getSize(); i++)
 		{
 			this.rotations.add(new RotationEvent(Rotation.DOWN,i));
 			this.rotations.add(new RotationEvent(Rotation.DOWN,i));
@@ -56,32 +54,32 @@ public class SecondLayer extends Solver
 		for(int i = 0; i < this.rotations.size(); i++)
 		{
 			RotationEvent rotation = this.rotations.get(i);
-			copy.rotate(rotation.getDirection(),rotation.getIndex());
+			cube.rotate(rotation.getDirection(),rotation.getIndex());
 		}
 		
 		for(int currentEdge = 0; currentEdge < 4; currentEdge++)
 		{
 		
-			int colorFront = copy.getSquare(Cube.FRONT).getColor();
-			int colorLeft = copy.getSquare(Cube.LEFT).getColor();
+			int colorFront = cube.getSquare(Cube.FRONT).getColor();
+			int colorLeft = cube.getSquare(Cube.LEFT).getColor();
 			
 			ArrayList<RotationEvent> newRotations = new ArrayList<RotationEvent>();
 			
-			if ((copy.getSquare(Cube.FRONT).getColor(0,1) == colorFront)
-					&& (copy.getSquare(Cube.TOP).getColor(2,1) == colorLeft))
+			if ((cube.getSquare(Cube.FRONT).getColor(0,1) == colorFront)
+					&& (cube.getSquare(Cube.TOP).getColor(2,1) == colorLeft))
 			{
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.LEFT).getColor(0,1) == colorFront)
-					&& (copy.getSquare(Cube.TOP).getColor(1,0) == colorLeft))
+			else if ((cube.getSquare(Cube.LEFT).getColor(0,1) == colorFront)
+					&& (cube.getSquare(Cube.TOP).getColor(1,0) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.LEFT).getColor(1,2) == colorFront)
-					&& (copy.getSquare(Cube.FRONT).getColor(1,0) == colorLeft))
+			else if ((cube.getSquare(Cube.LEFT).getColor(1,2) == colorFront)
+					&& (cube.getSquare(Cube.FRONT).getColor(1,0) == colorLeft))
 			{
 				newRotations.addAll(this.solveEdgeLeft());
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
@@ -89,8 +87,8 @@ public class SecondLayer extends Solver
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.LEFT).getColor(1,0) == colorFront)
-					&& (copy.getSquare(Cube.BACK).getColor(1,2) == colorLeft))
+			else if ((cube.getSquare(Cube.LEFT).getColor(1,0) == colorFront)
+					&& (cube.getSquare(Cube.BACK).getColor(1,2) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,1));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,2));
@@ -102,8 +100,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));		
 			}
 			
-			else if ((copy.getSquare(Cube.TOP).getColor(0,1) == colorFront)
-					&& (copy.getSquare(Cube.BACK).getColor(0,1) == colorLeft))
+			else if ((cube.getSquare(Cube.TOP).getColor(0,1) == colorFront)
+					&& (cube.getSquare(Cube.BACK).getColor(0,1) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
@@ -114,8 +112,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.TOP).getColor(2,1) == colorFront)
-					&& (copy.getSquare(Cube.FRONT).getColor(0,1) == colorLeft))
+			else if ((cube.getSquare(Cube.TOP).getColor(2,1) == colorFront)
+					&& (cube.getSquare(Cube.FRONT).getColor(0,1) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,1));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,2));
@@ -124,8 +122,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.TOP).getColor(1,0) == colorFront)
-					&& (copy.getSquare(Cube.LEFT).getColor(0,1) == colorLeft))
+			else if ((cube.getSquare(Cube.TOP).getColor(1,0) == colorFront)
+					&& (cube.getSquare(Cube.LEFT).getColor(0,1) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,0));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,1));
@@ -135,8 +133,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.TOP).getColor(1,2) == colorFront)
-					&& (copy.getSquare(Cube.RIGHT).getColor(0,1) == colorLeft))
+			else if ((cube.getSquare(Cube.TOP).getColor(1,2) == colorFront)
+					&& (cube.getSquare(Cube.RIGHT).getColor(0,1) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,1));
@@ -146,8 +144,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.RIGHT).getColor(1,2) == colorFront)
-					&& (copy.getSquare(Cube.BACK).getColor(1,0) == colorLeft))
+			else if ((cube.getSquare(Cube.RIGHT).getColor(1,2) == colorFront)
+					&& (cube.getSquare(Cube.BACK).getColor(1,0) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,1));
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
@@ -163,8 +161,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.FRONT).getColor(1,2) == colorFront)
-					&& (copy.getSquare(Cube.RIGHT).getColor(1,0) == colorLeft))
+			else if ((cube.getSquare(Cube.FRONT).getColor(1,2) == colorFront)
+					&& (cube.getSquare(Cube.RIGHT).getColor(1,0) == colorLeft))
 			{
 				newRotations.addAll(this.solveEdgeRight());
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
@@ -176,8 +174,8 @@ public class SecondLayer extends Solver
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
 			}
 			
-			else if ((copy.getSquare(Cube.BACK).getColor(1,0) == colorFront)
-					&& (copy.getSquare(Cube.RIGHT).getColor(1,2) == colorLeft))
+			else if ((cube.getSquare(Cube.BACK).getColor(1,0) == colorFront)
+					&& (cube.getSquare(Cube.RIGHT).getColor(1,2) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,1));
 				newRotations.add(new RotationEvent(Rotation.LEFT,2));
@@ -189,8 +187,8 @@ public class SecondLayer extends Solver
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.RIGHT).getColor(1,0) == colorFront)
-					&& (copy.getSquare(Cube.FRONT).getColor(1,2) == colorLeft))
+			else if ((cube.getSquare(Cube.RIGHT).getColor(1,0) == colorFront)
+					&& (cube.getSquare(Cube.FRONT).getColor(1,2) == colorLeft))
 			{
 				newRotations.addAll(this.solveEdgeRight());
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
@@ -198,23 +196,23 @@ public class SecondLayer extends Solver
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.RIGHT).getColor(0,1) == colorFront)
-					&& (copy.getSquare(Cube.TOP).getColor(1,2) == colorLeft))
+			else if ((cube.getSquare(Cube.RIGHT).getColor(0,1) == colorFront)
+					&& (cube.getSquare(Cube.TOP).getColor(1,2) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.BACK).getColor(0,1) == colorFront)
-					&& (copy.getSquare(Cube.TOP).getColor(0,1) == colorLeft))
+			else if ((cube.getSquare(Cube.BACK).getColor(0,1) == colorFront)
+					&& (cube.getSquare(Cube.TOP).getColor(0,1) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.add(new RotationEvent(Rotation.LEFT,0));
 				newRotations.addAll(this.solveEdgeLeft());
 			}
 			
-			else if ((copy.getSquare(Cube.BACK).getColor(1,2) == colorFront)
-					&& (copy.getSquare(Cube.LEFT).getColor(1,0) == colorLeft))
+			else if ((cube.getSquare(Cube.BACK).getColor(1,2) == colorFront)
+					&& (cube.getSquare(Cube.LEFT).getColor(1,0) == colorLeft))
 			{
 				newRotations.add(new RotationEvent(Rotation.RIGHT,1));
 				newRotations.add(new RotationEvent(Rotation.RIGHT,2));
@@ -236,18 +234,11 @@ public class SecondLayer extends Solver
 			for(int i = 0; i < newRotations.size(); i++)
 			{
 				RotationEvent rotation = newRotations.get(i);
-				copy.rotate(rotation.getDirection(),rotation.getIndex());
+				cube.rotate(rotation.getDirection(),rotation.getIndex());
 			}
 			
 			this.rotations.addAll(newRotations);
-			newRotations = new ArrayList<RotationEvent>();
 		}
-		
-		for(int i = 0; i < this.rotations.size(); i++)
-		{
-			RotationEvent rotation = this.rotations.get(i);
-			cube.rotate(rotation.getDirection(),rotation.getIndex());
-		}
-		
+		return this.rotations;
 	}
 }

@@ -1,12 +1,13 @@
-package model.solver;
+package model.solver.beginner.components;
 
 import java.util.ArrayList;
 
 import event.RotationEvent;
 import model.cube.Cube;
 import model.rotation.Rotation;
+import model.solver.SolverComponent;
 
-public class SolverFaceTop extends Solver
+public class SolverFaceTop extends SolverComponent
 {
 	public SolverFaceTop() 
 	{
@@ -54,31 +55,29 @@ public class SolverFaceTop extends Solver
 	}
 
 	@Override
-	public void solve(Cube cube) 
+	public ArrayList<RotationEvent> solve(Cube cube) 
 	{
-		Cube copy = new Cube(cube);
-		
-		int corners = this.getNumberCorner(copy);
-		int colorTop = copy.getSquare(Cube.TOP).getColor();
+		int corners = this.getNumberCorner(cube);
+		int colorTop = cube.getSquare(Cube.TOP).getColor();
 		
 		while(corners != 4)
 		{
 			ArrayList<RotationEvent> newRotations = new ArrayList<RotationEvent>();
 			if(corners == 0)
 			{
-				while(copy.getSquare(Cube.LEFT).getColor(0,2) != colorTop)
+				while(cube.getSquare(Cube.LEFT).getColor(0,2) != colorTop)
 				{
 					newRotations.add(new RotationEvent(Rotation.LEFT,0));
-					copy.rotate(Rotation.LEFT,0);
+					cube.rotate(Rotation.LEFT,0);
 				}
 			}
 			
 			else if(corners == 1)
 			{
-				while(copy.getSquare(Cube.TOP).getColor(2,0) != colorTop)
+				while(cube.getSquare(Cube.TOP).getColor(2,0) != colorTop)
 				{
 					newRotations.add(new RotationEvent(Rotation.LEFT,0));
-					copy.rotate(Rotation.LEFT,0);
+					cube.rotate(Rotation.LEFT,0);
 				}
 			}
 			
@@ -90,17 +89,12 @@ public class SolverFaceTop extends Solver
 			for(int i = 0; i < newRotations.size(); i++)
 			{
 				RotationEvent rotation = newRotations.get(i);
-				copy.rotate(rotation.getDirection(),rotation.getIndex());
+				cube.rotate(rotation.getDirection(),rotation.getIndex());
 			}
 			this.rotations.addAll(newRotations);
 
-			corners = this.getNumberCorner(copy);
+			corners = this.getNumberCorner(cube);
 		}
-	
-		for(int i = 0; i < this.rotations.size(); i++)
-		{
-			RotationEvent rotation = this.rotations.get(i);
-			cube.rotate(rotation.getDirection(),rotation.getIndex());
-		}
+		return this.rotations;
 	}
 }

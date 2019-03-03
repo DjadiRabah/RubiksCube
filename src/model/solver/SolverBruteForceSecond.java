@@ -7,7 +7,7 @@ import model.cube.piece.*;
 import model.cube.Square;
 import model.rotation.Rotation;
 
-public class SolverBruteForceSecond extends Solver
+public class SolverBruteForceSecond implements Solver
 {
 	private int minSteps = 40;
 	private ArrayList<Integer[]> bestCombination, stepsList;
@@ -78,7 +78,7 @@ public class SolverBruteForceSecond extends Solver
 		return this.bestCombination;
 	}
 
-	@Override
+
 	public void solve(Cube cube) 
 	{
 		this.c = cube;
