@@ -1,22 +1,20 @@
 package test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import event.RotationEvent;
 import model.cube.Cube;
 import model.shuffle.ShuffleRandom;
 import model.solver.beginner.SolverBeginner;
 
-public class TestSolver 
+class TestSolver 
 {
-	public TestSolver() 
-	{
-	}
-	
-	/* renvoie true si les 10000 cubes sont resolus
-	 * et false sinon
-	 */
-	public boolean test()
+	/*echoue si 1 cube parmi les 10000 n'est pas resolu */
+	@Test
+	void test() 
 	{
 		for(int i = 0; i < 10000; i++)
 		{
@@ -34,10 +32,8 @@ public class TestSolver
 			}
 			if(!cube.isSolved())
 			{
-				System.out.println(i + " " + cube);
-				return false;
+				fail(i + " " + cube);
 			}
 		}
-		return true;
 	}
 }
