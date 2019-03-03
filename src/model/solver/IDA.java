@@ -16,7 +16,7 @@ import model.rotation.Rotation;
 
 
 
-public class IDA implements Solver
+public class IDA extends Solver
 {	
 	/*
 	protected List<Integer[]> solution;

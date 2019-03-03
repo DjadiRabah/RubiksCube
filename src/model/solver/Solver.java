@@ -2,9 +2,16 @@ package model.solver;
 
 import java.util.ArrayList;
 
+import event.RotationEvent;
 import model.cube.Cube;
 
-public interface Solver
+public abstract class Solver
 {
-	public void solve(Cube cube);
+	protected ArrayList<RotationEvent> rotations;
+	
+	public Solver()
+	{
+		this.rotations = new ArrayList<RotationEvent>();
+	}
+	public abstract void solve(Cube cube);
 }

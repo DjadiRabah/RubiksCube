@@ -7,7 +7,7 @@ import model.cube.piece.*;
 import model.cube.Square;
 import model.rotation.Rotation;
 
-public class SolverBeginner implements Solver
+public class SolverBeginner extends Solver
 {
 	protected int[][] edges;
 	protected int[][] corners;
@@ -528,10 +528,15 @@ public class SolverBeginner implements Solver
 		
 	}
 	
-	@Override
 	public void solve(Cube cube) 
 	{
 		this.setEdges(cube);
 		this.setWhiteCross(cube);
+		new FirstLayer().solve(cube);
+		new SecondLayer().solve(cube);
+		new SolverCrossTop().solve(cube);
+		new SolverFaceTop().solve(cube);
+		new SolverBeginnerCornersTop().solve(cube);
+		new SolverBeginnerEdgesTop().solve(cube);
 	}
 }

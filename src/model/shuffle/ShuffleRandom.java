@@ -23,6 +23,7 @@ public class ShuffleRandom implements Shuffle
 			cube.rotate(direction, index);
 		}
 
+		new SolverBeginner().solve(cube);
 		return rotations;
 	}
 }
