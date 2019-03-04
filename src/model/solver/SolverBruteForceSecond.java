@@ -20,19 +20,19 @@ public class SolverBruteForceSecond implements Solver
 		this.stepsList = new ArrayList<>();
 	}
 
-	private ArrayList<Integer[]> solveCube(int numberStep)
+	private void solveCube(int numberStep)
 	{
 		if(numberStep >= this.minSteps)
 		{
 			this.stepsList.add(null);
-			return this.stepsList;
+			return;
 		}
 
 		if(this.c.isSolved())
 		{
 			this.minSteps = numberStep;
 			this.setBestCombination();
-			return this.stepsList;
+			return;
 		}
 
 		
@@ -62,7 +62,7 @@ public class SolverBruteForceSecond implements Solver
 			}
 		}
 
-		return this.bestCombination;
+		return;
 	}
 
 	private void setBestCombination()
