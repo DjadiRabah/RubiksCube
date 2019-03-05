@@ -5,15 +5,15 @@ import model.cube.Square;
 
 public class RotationSquare implements Rotation
 {	
-	protected int[][] transposeMatrix(Piece[][] pieces)
+	protected int[][] transposeMatrix(int[][] colors)
 	{
-		int size = pieces.length;
+		int size = colors.length;
         int[][] temp = new int[size][size];
         for (int i = 0; i < size; i++)
         {
         	for (int j = 0; j < size; j++)
         	{
-        		temp[i][j] = pieces[j][i].getColor();
+        		temp[i][j] = colors[j][i];
             }
         }
         return temp;
@@ -65,12 +65,12 @@ public class RotationSquare implements Rotation
 	{
 		if(direction == Rotation.CLOCKWISE)
 		{
-			square.setSquare(this.transposeMatrix(square.getPieces()));
+			square.setSquare(this.transposeMatrix(square.getColors()));
 			this.reverseCols(square);
 		}
 		else if(direction == Rotation.COUNTERCLOCKWISE)
 		{
-			square.setSquare(this.transposeMatrix(square.getPieces()));
+			square.setSquare(this.transposeMatrix(square.getColors()));
 			this.reverseRows(square);
 		} 
 	}
