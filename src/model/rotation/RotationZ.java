@@ -1,7 +1,6 @@
 package model.rotation;
 
 import model.cube.Cube;
-import model.cube.piece.*;
 
 public class RotationZ implements RotationComplex
 {	
@@ -29,14 +28,14 @@ public class RotationZ implements RotationComplex
 		switch (direction) 
 		{
             case CLOCKWISE :
-            	Piece[] top = cube.getSquare(Cube.TOP).getRow(cube.getSize() - index - 1);
+            	int[] top = cube.getSquare(Cube.TOP).getRow(cube.getSize() - index - 1);
             	cube.getSquare(Cube.TOP).setRowReverse(cube.getSize() - index - 1, cube.getSquare(Cube.LEFT).getCol(cube.getSize() - index - 1));
             	cube.getSquare(Cube.LEFT).setCol(cube.getSize() - index - 1, cube.getSquare(Cube.DOWN).getRow(index));
             	cube.getSquare(Cube.DOWN).setRowReverse(index, cube.getSquare(Cube.RIGHT).getCol(index));
             	cube.getSquare(Cube.RIGHT).setCol(index, top);
             break;
             case COUNTERCLOCKWISE :
-            	Piece[] tp = cube.getSquare(Cube.TOP).getRow(cube.getSize() - index - 1);
+            	int[] tp = cube.getSquare(Cube.TOP).getRow(cube.getSize() - index - 1);
             	cube.getSquare(Cube.TOP).setRow(cube.getSize() - index - 1, cube.getSquare(Cube.RIGHT).getCol(index));
             	cube.getSquare(Cube.RIGHT).setColReverse(index, cube.getSquare(Cube.DOWN).getRow(index));
             	cube.getSquare(Cube.DOWN).setRow(index, cube.getSquare(Cube.LEFT).getCol(cube.getSize() - index - 1));

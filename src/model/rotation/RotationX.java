@@ -1,7 +1,6 @@
 package model.rotation;
 
 import model.cube.Cube;
-import model.cube.piece.*;
 
 public class RotationX implements RotationComplex
 {	
@@ -29,7 +28,7 @@ public class RotationX implements RotationComplex
 		switch (direction) 
 		{
             case LEFT :
-            	Piece[] pieces = cube.getSquare(Cube.LEFT).getRow(index);
+            	int[] pieces = cube.getSquare(Cube.LEFT).getRow(index);
 				for(int i = 1; i < 4; i++)
 				{
 					cube.getSquare(i).setRow(index, cube.getSquare(i+1).getRow(index));

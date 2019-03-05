@@ -5,15 +5,15 @@ import model.cube.Square;
 
 public class RotationSquare implements Rotation
 {	
-	protected Piece[][] transposeMatrix(Piece[][] pieces)
+	protected int[][] transposeMatrix(Piece[][] pieces)
 	{
 		int size = pieces.length;
-        Piece[][] temp = new Piece[size][size];
+        int[][] temp = new int[size][size];
         for (int i = 0; i < size; i++)
         {
         	for (int j = 0; j < size; j++)
         	{
-        		temp[i][j] = pieces[j][i];
+        		temp[i][j] = pieces[j][i].getColor();
             }
         }
         return temp;
@@ -26,7 +26,7 @@ public class RotationSquare implements Rotation
 		{
 			for(int i = 0; i < size - 1; i++)
 	    	{
-	    		Piece[] temp = square.getRow(i);
+	    		int[] temp = square.getRow(i);
 	    		square.setRow(i, square.getRow(size - i - 1));
 	    		square.setRow(size-i-1, temp);
 	    	}
@@ -35,7 +35,7 @@ public class RotationSquare implements Rotation
 		else
     	for(int i = 0; i < size - 2; i++)
     	{
-    		Piece[] temp = square.getRow(i);
+    		int[] temp = square.getRow(i);
     		square.setRow(i, square.getRow(size - i - 1));
     		square.setRow(size-i-1, temp);
     	}
@@ -47,14 +47,14 @@ public class RotationSquare implements Rotation
 		if(size == 2)
 			for(int i = 0; i < size - 1; i++)
 	    	{
-	    		Piece[] temp = square.getCol(i);
+	    		int[] temp = square.getCol(i);
 	    		square.setCol(i, square.getCol(size - i - 1));
 	    		square.setCol(size-i-1, temp);
 	    	}
 		else
     	for(int i = 0; i < size - 2; i++)
     	{
-    		Piece[] temp = square.getCol(i);
+    		int[] temp = square.getCol(i);
     		square.setCol(i, square.getCol(size - i - 1));
     		square.setCol(size-i-1, temp);
     	}
