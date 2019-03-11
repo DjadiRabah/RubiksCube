@@ -9,81 +9,44 @@ import model.rotation.Rotation;
 
 public class SolverBruteForceSecond implements Solver
 {
-	private int minSteps = 25;
-	private ArrayList<Integer[]> bestCombination, stepsList;
+	private int max = 20;
+	private ArrayList<Integer[]> stepsList;
 	private Cube c;
 	private int cubeSize;
 
-	public SolverBruteForceSecond()
-	{
-		this.bestCombination = new ArrayList<>();
-		this.stepsList = new ArrayList<>();
-	}
-
 	private void solveCube(int numberStep)
 	{
-		if(numberStep >= this.minSteps)
-		{
-			this.stepsList.add(null);
+		if(numberStep >= this.max)
 			return;
-		}
 
-		if(this.c.isSolved())
-		{
-			this.minSteps = numberStep;
-			this.setBestCombination();
-			return;
-		}
-
-		
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < this.cubeSize; j++)
 			{
-				c.rotate(i, j);
+					c.rotate(i, j);
 
-				Integer[] actualStep = {i, j};
-				this.stepsList.add(actualStep);
+					Integer[] actualStep = {i, j};
+					this.stepsList.add(actualStep);
 
-				solveCube(numberStep + 1);
+					solveCube(numberStep + 1);
 
-				/*if(this.stepsList.get(this.stepsList.size() - 1) != null)
-				{
-					this.setBestCombination();
-					break;
-				}*/
+					if(c.isSolved())
+						return;
 
-				for(int k = numberStep; k < this.stepsList.size(); k++)
-				{
-					this.stepsList.remove(k);
-				}
+					for(int k = numberStep; k < this.stepsList.size(); k++)
+						this.stepsList.remove(k);
 
-				this.c.rotateInvert(i, j);
+					this.c.rotateInvert(i, j);
 			}
 		}
-
-		return;
 	}
 
-	private void setBestCombination()
+	public ArrayList<Integer[]> solve(Cube cube) 
 	{
-		this.bestCombination.clear();
-
-		for(int i=0; i < this.stepsList.size(); i++)
-		{
-			this.bestCombination.add(this.stepsList.get(i));
-		}
-	}
-
-	public ArrayList<Integer[]> getBestCombination()
-	{
-		return this.bestCombination;
-	}
-
-	public void solve(Cube cube) 
-	{
+		this.stepsList = new ArrayList<>();
 		this.c = cube;
 		this.cubeSize = this.c.getSize();
 		this.solveCube(0);
+		return this.stepsList;
 	}
 }
