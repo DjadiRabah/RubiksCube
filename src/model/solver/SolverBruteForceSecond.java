@@ -9,7 +9,7 @@ import model.rotation.Rotation;
 
 public class SolverBruteForceSecond implements Solver
 {
-	private int max = 20;
+	private int max = 21;
 	private ArrayList<Integer[]> stepsList;
 	private Cube c;
 	private int cubeSize;
@@ -19,10 +19,15 @@ public class SolverBruteForceSecond implements Solver
 		if(numberStep >= this.max)
 			return;
 
+		if(c.isSolved())
+			return;
+
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < this.cubeSize; j++)
 			{
+				if(!isLastRotationInverted(i, j))
+				{
 					c.rotate(i, j);
 
 					Integer[] actualStep = {i, j};
@@ -37,6 +42,7 @@ public class SolverBruteForceSecond implements Solver
 						this.stepsList.remove(k);
 
 					this.c.rotateInvert(i, j);
+				}
 			}
 		}
 	}
@@ -48,5 +54,20 @@ public class SolverBruteForceSecond implements Solver
 		this.cubeSize = this.c.getSize();
 		this.solveCube(0);
 		return this.stepsList;
+	}
+
+	private boolean isLastRotationInverted(int i, int j)
+	{
+		if(this.stepsList.isEmpty())
+			return false;
+
+		Integer[] tab = this.stepsList.get(this.stepsList.size() - 1);
+		if(j != tab[1])
+			return false;
+		if(((i%2) == 0) && (i+1) == tab[0])
+			return true;
+		if(((i%2) == 1) && (i-1) == tab[0])
+			return true;
+		return false;
 	}
 }
