@@ -7,14 +7,14 @@ import model.cube.piece.*;
 import model.cube.Square;
 import model.rotation.Rotation;
 
-public class SolverBruteForceSecond implements Solver
+public class SolverBruteForce implements Solver
 {
 	private int minSteps = 25;
 	private ArrayList<Integer[]> bestCombination, stepsList;
 	private Cube c;
 	private int cubeSize;
 
-	public SolverBruteForceSecond()
+	public SolverBruteForce()
 	{
 		this.bestCombination = new ArrayList<>();
 		this.stepsList = new ArrayList<>();

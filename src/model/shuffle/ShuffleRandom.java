@@ -2,6 +2,7 @@ package model.shuffle;
 
 import java.util.Random;
 import model.cube.Cube;
+import model.solver.IDA;
 import model.solver.beginner.SolverBeginner;
 
 public class ShuffleRandom implements Shuffle
@@ -10,13 +11,13 @@ public class ShuffleRandom implements Shuffle
 	public void shuffle(Cube cube)
 	{
 		cube.Init();
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 4; i++)
 		{
 			Random r = new Random();
 			int direction = r.nextInt(6);
 			int index = r.nextInt(cube.getSize());
 			cube.rotate(direction, index);
 		}
-		new SolverBeginner().solve(cube);
+		new IDA().solve(cube);
 	}
 }
