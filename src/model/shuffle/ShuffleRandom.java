@@ -1,21 +1,15 @@
 package model.shuffle;
 
-import java.util.ArrayDeque;
-
-import java.util.Deque;
 import java.util.Random;
-
 import model.cube.Cube;
-import model.solver.*;
 import model.solver.beginner.SolverBeginner;
 
 public class ShuffleRandom implements Shuffle
 {
 	@Override
-	public Deque<Integer[]> shuffle(Cube cube)
+	public void shuffle(Cube cube)
 	{
 		cube.Init();
-		Deque<Integer[]> rotations =  new ArrayDeque<>();
 		for(int i = 0; i < 20; i++)
 		{
 			Random r = new Random();
@@ -23,6 +17,6 @@ public class ShuffleRandom implements Shuffle
 			int index = r.nextInt(cube.getSize());
 			cube.rotate(direction, index);
 		}
-		return rotations;
+		new SolverBeginner().solve(cube);
 	}
 }

@@ -9,65 +9,81 @@ import model.rotation.Rotation;
 
 public class SolverBruteForceSecond implements Solver
 {
-	private int max = 21;
-	private ArrayList<Integer[]> stepsList;
+	private int minSteps = 25;
+	private ArrayList<Integer[]> bestCombination, stepsList;
 	private Cube c;
 	private int cubeSize;
 
+	public SolverBruteForceSecond()
+	{
+		this.bestCombination = new ArrayList<>();
+		this.stepsList = new ArrayList<>();
+	}
+
 	private void solveCube(int numberStep)
 	{
-		if(numberStep >= this.max)
+		if(numberStep >= this.minSteps)
+		{
+			this.stepsList.add(null);
 			return;
+		}
 
-		if(c.isSolved())
+		if(this.c.isSolved())
+		{
+			this.minSteps = numberStep;
+			this.setBestCombination();
 			return;
+		}
 
+		
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < this.cubeSize; j++)
 			{
-				if(!isLastRotationInverted(i, j))
+				c.rotate(i, j);
+
+				Integer[] actualStep = {i, j};
+				this.stepsList.add(actualStep);
+
+				solveCube(numberStep + 1);
+
+				/*if(this.stepsList.get(this.stepsList.size() - 1) != null)
 				{
-					c.rotate(i, j);
+					this.setBestCombination();
+					break;
+				}*/
 
-					Integer[] actualStep = {i, j};
-					this.stepsList.add(actualStep);
-
-					solveCube(numberStep + 1);
-
-					if(c.isSolved())
-						return;
-
-					for(int k = numberStep; k < this.stepsList.size(); k++)
-						this.stepsList.remove(k);
-
-					this.c.rotateInvert(i, j);
+				for(int k = numberStep; k < this.stepsList.size(); k++)
+				{
+					this.stepsList.remove(k);
 				}
+
+				this.c.rotateInvert(i, j);
 			}
+		}
+
+		return;
+	}
+
+	private void setBestCombination()
+	{
+		this.bestCombination.clear();
+
+		for(int i=0; i < this.stepsList.size(); i++)
+		{
+			this.bestCombination.add(this.stepsList.get(i));
 		}
 	}
 
-	public ArrayList<Integer[]> solve(Cube cube) 
+	public ArrayList<Integer[]> getBestCombination()
 	{
-		this.stepsList = new ArrayList<>();
+		return this.bestCombination;
+	}
+
+	public void solve(Cube cube) 
+	{
 		this.c = cube;
 		this.cubeSize = this.c.getSize();
 		this.solveCube(0);
-		return this.stepsList;
-	}
-
-	private boolean isLastRotationInverted(int i, int j)
-	{
-		if(this.stepsList.isEmpty())
-			return false;
-
-		Integer[] tab = this.stepsList.get(this.stepsList.size() - 1);
-		if(j != tab[1])
-			return false;
-		if(((i%2) == 0) && (i+1) == tab[0])
-			return true;
-		if(((i%2) == 1) && (i-1) == tab[0])
-			return true;
-		return false;
 	}
 }

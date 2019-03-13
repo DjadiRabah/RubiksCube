@@ -41,6 +41,11 @@ public class Piece
 		this.setColor(color);
 	}
 	
+	public Piece(Piece copy)
+	{
+		this.color = copy.color;
+	}
+	
 	/**
      * Fixe la couleur de la piece
      * 

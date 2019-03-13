@@ -34,6 +34,7 @@ class TestSolver
 			{
 				fail(i + " " + cube);
 			}
+			
 		}
 	}
 }

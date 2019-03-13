@@ -78,7 +78,7 @@ public class Square
 		{
 			for(int j = 0; j < this.pieces[i].length; j++)
 			{
-				this.pieces[i][j] = square.pieces[i][j];
+				this.pieces[i][j] = new Piece(square.pieces[i][j]);
 			}
 		}
 	}
