@@ -20,11 +20,14 @@ public class SolverComposite implements Solver
 	
 	public ArrayList<ArrayList<RotationEvent>> solve(Cube cube)
 	{
-		Cube copy = new Cube(cube);
 		ArrayList<ArrayList<RotationEvent>> rotations = new ArrayList<ArrayList<RotationEvent>>();
-		for(int currentSolver = 0; currentSolver < this.solvers.size(); currentSolver++)
+		if(!cube.isSolved())
 		{
-			rotations.add(this.solvers.get(currentSolver).solve(copy));
+			Cube copy = new Cube(cube);
+			for(int currentSolver = 0; currentSolver < this.solvers.size(); currentSolver++)
+			{
+				rotations.add(this.solvers.get(currentSolver).solve(copy));
+			}
 		}
 		return rotations;
 	}

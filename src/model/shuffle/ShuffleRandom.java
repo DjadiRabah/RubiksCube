@@ -18,6 +18,5 @@ public class ShuffleRandom implements Shuffle
 			int index = r.nextInt(cube.getSize());
 			cube.rotate(direction, index);
 		}
-		new IDA().solve(cube);
 	}
 }
